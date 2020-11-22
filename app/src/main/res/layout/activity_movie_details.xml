@@ -19,8 +19,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/orig" />
+            app:srcCompat="@drawable/poster" />
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="298dp"
+            android:contentDescription="poster"
+            android:src="@drawable/gradient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/movie_details"
