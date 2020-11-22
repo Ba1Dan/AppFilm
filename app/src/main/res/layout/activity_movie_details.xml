@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="298dp"
-            android:contentDescription="poster"
+            android:contentDescription="@string/desc_poster"
             android:src="@drawable/gradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
-                android:text="Back"
+                android:text="@string/back"
                 android:textColor="@color/white"
                 app:drawableStartCompat="@drawable/ic_back" />
 
@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="13+"
+                    android:text="@string/pg_13"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingMultiplier="0.9"
-                    android:text="Avengers: End Game"
+                    android:text="@string/avengers_end_game"
                     android:textColor="@color/white"
                     android:textSize="40sp"
                     android:textStyle="bold" />
@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Action, Adventure, Fantasy"
+                android:text="@string/action_adventure_fantasy"
                 android:textColor="@color/text_red"
                 android:textSize="14sp" />
 
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8.9dp"
-                    android:text="125 reviews"
+                    android:text="@string/reviews"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Storyline"
+                    android:text="@string/storyline"
                     android:textColor="@color/color_white1"
                     android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                     android:layout_marginTop="4dp"
                     android:alpha="0.75"
                     android:letterSpacing="0.08"
-                    android:text="After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe."
+                    android:text="@string/storyline_content"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="7dp"
-                android:text="Cast"
+                android:text="@string/cast"
                 android:textColor="@color/color_white1"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -160,7 +160,7 @@
             style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:text="Robert Downey Jr."
+            android:text="@string/robert_downey_jr"
             app:layout_constraintEnd_toEndOf="@+id/imageViewActor1"
             app:layout_constraintStart_toStartOf="@+id/imageViewActor1"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActor1" />
@@ -179,7 +179,7 @@
             style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:text="Chris Evans"
+            android:text="@string/chris_evans"
             app:layout_constraintEnd_toEndOf="@+id/imageViewActor2"
             app:layout_constraintStart_toStartOf="@+id/imageViewActor2"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActor2" />
@@ -220,7 +220,7 @@
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginTop="4dp"
-            android:text="Chris Hemsworth"
+            android:text="@string/chris_hemsworth"
             app:layout_constraintEnd_toEndOf="@+id/imageViewActor4"
             app:layout_constraintStart_toStartOf="@+id/imageViewActor4"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActor4" />
