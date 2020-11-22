@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -14,8 +14,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="298dp"
+            android:layout_height="@dimen/poster_height"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/desc_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +24,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="298dp"
+            android:layout_height="@dimen/poster_height"
             android:contentDescription="@string/desc_poster"
             android:src="@drawable/gradient"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,7 @@
             android:id="@+id/movie_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/movie_details_margin"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/back_height"
                 android:layout_marginTop="28dp"
                 android:alpha="0.25"
                 android:drawablePadding="8dp"
@@ -56,17 +57,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="112dp"
-                android:layout_marginTop="138dp"
-                android:orientation="vertical"
-                tools:ignore="MissingConstraints">
+                android:layout_height="@dimen/title_height"
+                android:layout_marginTop="@dimen/title_margin_top"
+                android:orientation="vertical" >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pg_13"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/size_pg_13"
                     android:textStyle="bold" />
 
                 <TextView
@@ -75,7 +75,7 @@
                     android:lineSpacingMultiplier="0.9"
                     android:text="@string/avengers_end_game"
                     android:textColor="@color/white"
-                    android:textSize="40sp"
+                    android:textSize="@dimen/size_name"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -84,11 +84,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/action_adventure_fantasy"
                 android:textColor="@color/text_red"
-                android:textSize="14sp" />
+                android:textSize="@dimen/size_tag" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/rating_height"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:progressBackgroundTint="#6D6D80"
+                    android:progressBackgroundTint="@color/stair_off"
                     android:progressTint="@color/text_red"
                     android:rating="4"
                     android:stepSize="1" />
@@ -106,16 +106,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8.9dp"
+                    android:layout_marginStart="9dp"
                     android:text="@string/reviews"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/size_reviews"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="124dp"
+                android:layout_height="@dimen/desc_height"
                 android:orientation="vertical">
 
                 <TextView
@@ -152,7 +152,7 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/robert"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movie_details" />
 
@@ -171,7 +171,7 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/chris"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/imageViewActor1"
             app:layout_constraintTop_toBottomOf="@id/movie_details" />
 
@@ -190,7 +190,7 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/ruffalo"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/imageViewActor2"
             app:layout_constraintTop_toBottomOf="@id/movie_details" />
 
@@ -198,7 +198,7 @@
             style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:text="Mark Ruffalo"
+            android:text="@string/mark_ruffalo"
             app:layout_constraintEnd_toEndOf="@+id/imageViewActor3"
             app:layout_constraintStart_toStartOf="@+id/imageViewActor3"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActor3" />
@@ -209,8 +209,8 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/chris_hemsworth"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintStart_toEndOf="@id/imageViewActor3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movie_details"/>
