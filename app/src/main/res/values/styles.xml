@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ActorNameStyle">
+        <item name="android:layout_marginTop">@dimen/actor_text_margin</item>
+        <item name="android:textColor">@color/color_white1</item>
+    </style>
+</resources>
