@@ -94,14 +94,12 @@
                 android:orientation="horizontal">
 
                 <RatingBar
-                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:progressBackgroundTint="@color/stair_off"
-                    android:progressTint="@color/text_red"
                     android:rating="4"
-                    android:stepSize="1" />
+                    android:numStars="5"
+                    android:isIndicator="true"
+                    style="@style/starRatingBar"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -170,7 +168,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:srcCompat="@drawable/chris"
+            app:srcCompat="@drawable/chris_evans"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/imageViewActor1"
             app:layout_constraintTop_toBottomOf="@id/movie_details" />

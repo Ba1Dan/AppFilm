@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="ActorNameStyle">
         <item name="android:layout_marginTop">@dimen/actor_text_margin</item>
         <item name="android:textColor">@color/color_white1</item>
+    </style>
+
+
+    <style name="starRatingBar" parent="@android:style/Widget.RatingBar.Indicator">
+        <item name="android:progressDrawable">@drawable/star_rating_bar_full</item>
+        <item name="android:minHeight">12dip</item>
+        <item name="android:maxHeight">12dip</item>
     </style>
 </resources>
