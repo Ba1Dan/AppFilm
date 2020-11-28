@@ -10,4 +10,6 @@
     <color name="text_red">#FF3365</color>
     <color name="color_white1">#ECECEC</color>
     <color name="stair_off">#6D6D80</color>
+    <color name="background_item">#222232</color>
+    <color name="rounded">#FD5E5E63</color>
 </resources>
