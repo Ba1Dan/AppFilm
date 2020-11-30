@@ -1,5 +1,6 @@
 package ru.baiganov.appfilm
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +20,24 @@ class FragmentMoviesDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvBackToMovieList = view.findViewById<TextView>(R.id.tv_back).apply {
-            setOnClickListener{ listener?.backToMovieList() }
+            setOnClickListener{
+                listener?.backToMovieList()
+            }
         }
     }
 
-    fun setListener(l: ClickListener) {
-        listener = l
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ClickListener){
+            listener = context
+        }
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
 
     interface ClickListener {
         fun backToMovieList()

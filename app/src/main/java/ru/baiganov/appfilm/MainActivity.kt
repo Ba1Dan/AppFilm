@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_main_activity, fragmentMoviesList)
+            addToBackStack(null)
             commit()
         }
     }
@@ -23,15 +24,12 @@ class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
         val fragmentMoviesDetails = FragmentMoviesDetails()
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_main_activity, fragmentMoviesDetails)
+            addToBackStack(null)
             commit()
         }
     }
 
     override fun backToMovieList() {
-       val fragmentMoviesList = FragmentMoviesList()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesList)
-            commit()
-        }
+       supportFragmentManager.popBackStack()
     }
 }
