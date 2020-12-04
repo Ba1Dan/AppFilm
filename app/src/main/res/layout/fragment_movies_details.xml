@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/poster"
             android:layout_width="0dp"
             android:layout_height="@dimen/poster_height"
             android:scaleType="centerCrop"
@@ -62,6 +62,7 @@
                 android:orientation="vertical" >
 
                 <TextView
+                    android:id="@+id/tv_pg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pg_13"
@@ -70,6 +71,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingMultiplier="0.9"
@@ -80,6 +82,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_tag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/action_adventure_fantasy"
@@ -94,6 +97,7 @@
                 android:orientation="horizontal">
 
                 <RatingBar
+                    android:id="rb_stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:rating="4"
@@ -102,6 +106,7 @@
                     style="@style/starRatingBar"/>
 
                 <TextView
+                    android:id="@+id/tv_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
@@ -124,6 +129,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_storyline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"

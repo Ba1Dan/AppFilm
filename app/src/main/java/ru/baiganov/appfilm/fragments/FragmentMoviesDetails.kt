@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm
+package ru.baiganov.appfilm.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import ru.baiganov.appfilm.R
 
 class FragmentMoviesDetails : Fragment() {
 
     private var tvBackToMovieList:TextView? = null
-    private var listener:ClickListener? = null
+    private var listener: ClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movies_details, container, false)
@@ -21,7 +22,8 @@ class FragmentMoviesDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tvBackToMovieList = view.findViewById<TextView>(R.id.tv_back).apply {
             setOnClickListener{
-                listener?.backToMovieList()
+                //listener?.backToMovieList()
+                fragmentManager?.popBackStack()
             }
         }
     }

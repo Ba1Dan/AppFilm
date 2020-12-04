@@ -3,7 +3,8 @@ package ru.baiganov.appfilm
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.cardview.widget.CardView
+import ru.baiganov.appfilm.fragments.FragmentMoviesDetails
+import ru.baiganov.appfilm.fragments.FragmentMoviesList
 
 class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
 
