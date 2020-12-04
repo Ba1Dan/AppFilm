@@ -97,7 +97,7 @@
                 android:orientation="horizontal">
 
                 <RatingBar
-                    android:id="rb_stars"
+                    android:id="@+id/rb_stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:rating="4"
@@ -228,7 +228,5 @@
             app:layout_constraintEnd_toEndOf="@+id/imageViewActor4"
             app:layout_constraintStart_toStartOf="@+id/imageViewActor4"
             app:layout_constraintTop_toBottomOf="@+id/imageViewActor4" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

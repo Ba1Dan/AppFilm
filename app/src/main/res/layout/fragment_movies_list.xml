@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <LinearLayout
         android:id="@+id/linear_layout_name"
@@ -44,6 +43,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_layout_name" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

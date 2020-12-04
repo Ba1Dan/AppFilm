@@ -1,8 +1,10 @@
 package ru.baiganov.appfilm.data
 
-data class Movie (
-        //var poster: String,
-        //var favourite: Boolean,
+import android.graphics.drawable.Drawable
+
+data class Movie(
+        var poster: Int, // String
+        var favourite: Boolean,
         var pg: String,
         var name: String,
         var tag: String,

@@ -6,18 +6,17 @@ import android.view.View
 import ru.baiganov.appfilm.fragments.FragmentMoviesDetails
 import ru.baiganov.appfilm.fragments.FragmentMoviesList
 
-class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val fragmentMoviesList = FragmentMoviesList()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesList)
-            addToBackStack(null)
-            commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fl_main_activity, FragmentMoviesList())
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 
@@ -28,9 +27,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
             addToBackStack(null)
             commit()
         }
-    }
-
-    override fun backToMovieList() {
-       supportFragmentManager.popBackStack()
     }
 }
