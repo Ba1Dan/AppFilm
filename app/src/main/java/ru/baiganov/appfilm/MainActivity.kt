@@ -5,31 +5,25 @@ import android.os.Bundle
 import android.view.View
 import androidx.cardview.widget.CardView
 
-class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val fragmentMoviesList = FragmentMoviesList()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesList)
-            addToBackStack(null)
-            commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fl_main_activity, FragmentMoviesList())
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 
     fun onClickCard(view: View) {
-        val fragmentMoviesDetails = FragmentMoviesDetails()
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesDetails)
+            replace(R.id.fl_main_activity,  FragmentMoviesDetails())
             addToBackStack(null)
             commit()
         }
-    }
-
-    override fun backToMovieList() {
-       supportFragmentManager.popBackStack()
     }
 }
