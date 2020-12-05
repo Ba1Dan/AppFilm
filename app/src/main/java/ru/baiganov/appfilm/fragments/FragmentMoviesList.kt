@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.R
+import ru.baiganov.appfilm.adapter.OnItemClicked
+import ru.baiganov.appfilm.data.Movie
 import ru.baiganov.appfilm.domain.MoviesDataSource
 
 class FragmentMoviesList : Fragment(){
@@ -22,7 +25,7 @@ class FragmentMoviesList : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerMovies = view.findViewById(R.id.rv_movies)
-        adapter = MoviesAdapter()
+        adapter = MoviesAdapter(clickListener)
         recyclerMovies?.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerMovies?.adapter = adapter
     }
@@ -40,6 +43,20 @@ class FragmentMoviesList : Fragment(){
     private fun updateData() {
         (recyclerMovies?.adapter as? MoviesAdapter)?.apply {
             bindActors(MoviesDataSource().getMovies())
+        }
+    }
+
+    private fun doOnClick(movie: Movie) {
+        fragmentManager?.beginTransaction()?.apply {
+            replace(R.id.fl_main_activity, FragmentMoviesDetails())
+            addToBackStack(null)
+            commit()
+        }
+    }
+
+    private val clickListener = object : OnItemClicked {
+        override fun onItemClick(movie: Movie) {
+            doOnClick(movie)
         }
     }
 }

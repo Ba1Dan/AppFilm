@@ -13,7 +13,9 @@ import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.data.Movie
 import java.io.File
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(
+        private val listener: OnItemClicked
+): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     private var movies = listOf<Movie>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false))
@@ -22,6 +24,9 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val currentItem = movies[position]
         holder.onBind(currentItem)
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(movies[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -62,4 +67,8 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
 private val RecyclerView.ViewHolder.context
     get() = this.itemView.context
+
+interface OnItemClicked {
+    fun onItemClick(movie: Movie)
+}
 

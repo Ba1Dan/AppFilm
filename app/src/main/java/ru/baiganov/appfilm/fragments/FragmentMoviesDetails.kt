@@ -17,7 +17,7 @@ class FragmentMoviesDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tvBackToMovieList = view.findViewById<TextView>(R.id.tv_back).apply {
+        view.findViewById<TextView>(R.id.tv_back).apply {
             setOnClickListener{
                 fragmentManager?.popBackStack()
             }
