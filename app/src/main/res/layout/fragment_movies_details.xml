@@ -150,83 +150,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageViewActor1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:srcCompat="@drawable/robert"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_actors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_details" />
-
-        <TextView
-            style="@style/ActorNameStyle"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:text="@string/robert_downey_jr"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewActor1"
-            app:layout_constraintStart_toStartOf="@+id/imageViewActor1"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewActor1" />
-
-        <ImageView
-            android:id="@+id/imageViewActor2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:srcCompat="@drawable/chris_evans"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/imageViewActor1"
-            app:layout_constraintTop_toBottomOf="@id/movie_details" />
-
-        <TextView
-            style="@style/ActorNameStyle"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:text="@string/chris_evans"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewActor2"
-            app:layout_constraintStart_toStartOf="@+id/imageViewActor2"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewActor2" />
-
-        <ImageView
-            android:id="@+id/imageViewActor3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:srcCompat="@drawable/ruffalo"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/imageViewActor2"
-            app:layout_constraintTop_toBottomOf="@id/movie_details" />
-
-        <TextView
-            style="@style/ActorNameStyle"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:text="@string/mark_ruffalo"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewActor3"
-            app:layout_constraintStart_toStartOf="@+id/imageViewActor3"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewActor3" />
-
-        <ImageView
-            android:id="@+id/imageViewActor4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:srcCompat="@drawable/chris_hemsworth"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintStart_toEndOf="@id/imageViewActor3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_details"/>
-
-        <TextView
-            style="@style/ActorNameStyle"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/chris_hemsworth"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewActor4"
-            app:layout_constraintStart_toStartOf="@+id/imageViewActor4"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewActor4" />
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

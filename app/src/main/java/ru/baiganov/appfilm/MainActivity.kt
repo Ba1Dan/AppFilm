@@ -19,13 +19,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    fun onClickCard(view: View) {
-        val fragmentMoviesDetails = FragmentMoviesDetails()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesDetails)
-            addToBackStack(null)
-            commit()
-        }
-    }
 }
