@@ -7,9 +7,15 @@
     </style>
 
 
-    <style name="starRatingBar" parent="@android:style/Widget.RatingBar.Indicator">
+    <style name="starRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/star_rating_bar_full</item>
         <item name="android:minHeight">12dip</item>
         <item name="android:maxHeight">12dip</item>
+    </style>
+
+    <style name="starItemRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/star_item_bar_full</item>
+        <item name="android:minHeight">8dip</item>
+        <item name="android:maxHeight">8dip</item>
     </style>
 </resources>

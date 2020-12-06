@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -43,6 +42,7 @@
 
 
             <TextView
+                android:id="@+id/tv_back"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/back_height"
                 android:layout_marginTop="28dp"
