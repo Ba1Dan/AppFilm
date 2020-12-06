@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_sign" />
+            android:src="@drawable/ic_sign"
+            android:contentDescription="@string/ic_movie_list" />
 
         <TextView
             android:id="@+id/textView7"
@@ -31,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:gravity="center_vertical"
-            android:text="Movies List"
+            android:text="@string/movies_list"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

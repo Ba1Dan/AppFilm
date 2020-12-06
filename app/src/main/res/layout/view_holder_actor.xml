@@ -15,14 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/robert" />
+        android:contentDescription="@string/desc_avatar_actor" />
 
     <TextView
         android:id="@+id/tv_full_name"
         style="@style/ActorNameStyle"
         android:layout_width="0dp"
         android:layout_height="32dp"
-        android:text="@string/robert_downey_jr"
+        android:text=""
         app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
         app:layout_constraintStart_toStartOf="@+id/iv_avatar"
         app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
