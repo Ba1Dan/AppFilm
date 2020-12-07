@@ -54,6 +54,4 @@ class FragmentMoviesDetails : Fragment() {
             onBindActors(ActorsDataSource().getActors(requireContext()))
         }
     }
-
-
 }

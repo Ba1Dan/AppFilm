@@ -2,10 +2,9 @@ package ru.baiganov.appfilm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.cardview.widget.CardView
+import ru.baiganov.appfilm.fragments.FragmentMoviesList
 
-class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,18 +17,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesDetails.ClickListener {
             addToBackStack(null)
             commit()
         }
-    }
-
-    fun onClickCard(view: View) {
-        val fragmentMoviesDetails = FragmentMoviesDetails()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesDetails)
-            addToBackStack(null)
-            commit()
-        }
-    }
-
-    override fun backToMovieList() {
-       supportFragmentManager.popBackStack()
     }
 }
