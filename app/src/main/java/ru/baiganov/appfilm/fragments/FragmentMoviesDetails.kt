@@ -44,13 +44,8 @@ class FragmentMoviesDetails : Fragment() {
         updateData()
     }
 
-    override fun onDetach() {
-        recyclerActors = null
-        super.onDetach()
-    }
-
     private fun updateData() {
-        (recyclerActors?.adapter as? ActorsAdapter)?.apply {
+        adapter.apply {
             onBindActors(ActorsDataSource().getActors(requireContext()))
         }
     }

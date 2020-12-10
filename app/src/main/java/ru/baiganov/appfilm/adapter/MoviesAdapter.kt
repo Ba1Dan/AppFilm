@@ -14,8 +14,8 @@ import ru.baiganov.appfilm.data.Movie
 import java.io.File
 
 class MoviesAdapter(
-        private val listener: OnItemClicked
-): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+        private val listener: ItemClickListener
+): RecyclerView.Adapter<MoviesViewHolder>() {
     private var movies = listOf<Movie>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false))
@@ -33,34 +33,34 @@ class MoviesAdapter(
         return movies.size
     }
 
-    fun bindActors(newMovies: List<Movie>) {
+    fun bindMovies(newMovies: List<Movie>) {
         movies = newMovies
     }
+}
 
-    inner class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val poster: ImageView = itemView.findViewById(R.id.iv_poster_item)
-        private val name: TextView = itemView.findViewById(R.id.tv_name_item)
-        private val time: TextView = itemView.findViewById(R.id.tv_time)
-        private val reviews: TextView = itemView.findViewById(R.id.tv_reviews_item)
-        private val tag: TextView = itemView.findViewById(R.id.tv_tag_item)
-        private val pg: TextView = itemView.findViewById(R.id.tv_pg_item)
-        private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
+class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val poster: ImageView = itemView.findViewById(R.id.iv_poster_item)
+    private val name: TextView = itemView.findViewById(R.id.tv_name_item)
+    private val time: TextView = itemView.findViewById(R.id.tv_time)
+    private val reviews: TextView = itemView.findViewById(R.id.tv_reviews_item)
+    private val tag: TextView = itemView.findViewById(R.id.tv_tag_item)
+    private val pg: TextView = itemView.findViewById(R.id.tv_pg_item)
+    private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
 
-        fun onBind(movie: Movie) {
-            Glide.with(context)
-                    .load(movie.poster)
-                    .into(poster)
+    fun onBind(movie: Movie) {
+        Glide.with(context)
+                .load(movie.poster)
+                .into(poster)
 
-            name.text = movie.name
-            time.text = movie.time
-            reviews.text = movie.reviews
-            tag.text = movie.tag
-            pg.text = movie.pg
-            if (movie.favourite) {
-                favourite.setImageResource(R.drawable.ic_like)
-            } else {
-                favourite.setImageResource(R.drawable.ic_no_like)
-            }
+        name.text = movie.name
+        time.text = movie.time
+        reviews.text = movie.reviews
+        tag.text = movie.tag
+        pg.text = movie.pg
+        if (movie.favourite) {
+            favourite.setImageResource(R.drawable.ic_like)
+        } else {
+            favourite.setImageResource(R.drawable.ic_no_like)
         }
     }
 }
@@ -68,7 +68,7 @@ class MoviesAdapter(
 private val RecyclerView.ViewHolder.context
     get() = this.itemView.context
 
-interface OnItemClicked {
+interface ItemClickListener {
     fun onItemClick(movie: Movie)
 }
 

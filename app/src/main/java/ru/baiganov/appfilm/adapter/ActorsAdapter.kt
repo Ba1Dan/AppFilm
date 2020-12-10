@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.data.Actor
 
-class ActorsAdapter: RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
+class ActorsAdapter: RecyclerView.Adapter<ActorsViewHolder>() {
 
     private var actors = listOf<Actor>()
 
@@ -30,18 +30,18 @@ class ActorsAdapter: RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
     fun onBindActors(newActors:List<Actor>) {
         actors = newActors
     }
+}
 
-    inner class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val avatar:ImageView = itemView.findViewById(R.id.iv_avatar)
-        private val name:TextView = itemView.findViewById(R.id.tv_full_name)
+    private val avatar:ImageView = itemView.findViewById(R.id.iv_avatar)
+    private val name:TextView = itemView.findViewById(R.id.tv_full_name)
 
-        fun onBind(actor: Actor) {
-            name.text = actor.name
-            Glide.with(context)
-                    .load(actor.avatar)
-                    .into(avatar)
-        }
+    fun onBind(actor: Actor) {
+        name.text = actor.name
+        Glide.with(context)
+                .load(actor.avatar)
+                .into(avatar)
     }
 }
 
