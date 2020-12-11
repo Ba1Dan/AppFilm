@@ -45,8 +45,6 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun updateData() {
-        adapter.apply {
-            onBindActors(ActorsDataSource().getActors(requireContext()))
-        }
+        adapter.onBindActors(ActorsDataSource().getActors(requireContext()))
     }
 }

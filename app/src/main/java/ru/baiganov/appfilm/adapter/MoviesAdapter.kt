@@ -15,8 +15,10 @@ import java.io.File
 
 class MoviesAdapter(
         private val listener: ItemClickListener
-): RecyclerView.Adapter<MoviesViewHolder>() {
+        ) : RecyclerView.Adapter<MoviesViewHolder>() {
+
     private var movies = listOf<Movie>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false))
     }

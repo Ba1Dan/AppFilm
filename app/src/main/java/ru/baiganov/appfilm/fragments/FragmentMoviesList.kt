@@ -45,9 +45,7 @@ class FragmentMoviesList : Fragment(){
     }
 
     private fun updateData() {
-        adapter.apply {
-            bindMovies(MoviesDataSource().getMovies())
-        }
+        adapter.bindMovies(MoviesDataSource().getMovies())
     }
 
     private val clickListener = object : ItemClickListener {
