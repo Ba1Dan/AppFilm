@@ -10,10 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentMoviesList = FragmentMoviesList()
-
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_main_activity, fragmentMoviesList)
+            replace(R.id.fl_main_activity, FragmentMoviesList())
             addToBackStack(null)
             commit()
         }
