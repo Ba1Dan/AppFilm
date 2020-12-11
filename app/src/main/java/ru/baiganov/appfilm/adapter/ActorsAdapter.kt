@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.academy.fundamentals.homework.features.data.Actor
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
-import ru.baiganov.appfilm.data.Actor
 
 class ActorsAdapter: RecyclerView.Adapter<ActorsViewHolder>() {
 
@@ -40,8 +40,8 @@ class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun onBind(actor: Actor) {
         name.text = actor.name
         Glide.with(context)
-                .load(actor.avatar)
-                .into(avatar)
+            .load(actor.picture)
+            .into(avatar)
     }
 }
 

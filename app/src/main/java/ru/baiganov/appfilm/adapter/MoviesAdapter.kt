@@ -1,17 +1,19 @@
 package ru.baiganov.appfilm.adapter
 
-import android.os.Environment
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
+import com.android.academy.fundamentals.homework.features.data.Movie
+import com.android.academy.fundamentals.homework.features.data.loadMovies
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.R
-import ru.baiganov.appfilm.data.Movie
-import java.io.File
 
 class MoviesAdapter(
         private val listener: ItemClickListener
@@ -35,35 +37,43 @@ class MoviesAdapter(
         return movies.size
     }
 
-    fun bindMovies(newMovies: List<Movie>) {
-        movies = newMovies
+    fun bindMovies(context: Context) {
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            movies = loadMovies(context)
+        }
     }
 }
 
 class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     private val poster: ImageView = itemView.findViewById(R.id.iv_poster_item)
     private val name: TextView = itemView.findViewById(R.id.tv_name_item)
     private val time: TextView = itemView.findViewById(R.id.tv_time)
     private val reviews: TextView = itemView.findViewById(R.id.tv_reviews_item)
-    private val tag: TextView = itemView.findViewById(R.id.tv_tag_item)
+    private val genres: TextView = itemView.findViewById(R.id.tv_tag_item)
     private val pg: TextView = itemView.findViewById(R.id.tv_pg_item)
     private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
 
     fun onBind(movie: Movie) {
         Glide.with(context)
-                .load(movie.poster)
-                .into(poster)
+            .load(movie.poster)
+            .into(poster)
 
-        name.text = movie.name
-        time.text = movie.time
-        reviews.text = movie.reviews
-        tag.text = movie.tag
-        pg.text = movie.pg
-        if (movie.favourite) {
+        name.text = movie.title
+        time.text = movie.runtime.toString()
+        reviews.text = movie.ratings.toString()
+        pg.text = movie.minimumAge.toString() + "+"
+        var temp:String = movie.genres[0].name
+        for (i in 1 until movie.genres.size) {
+            temp = temp + ", " + movie.genres[i].name
+        }
+        genres.text = temp
+        /*if (movie.favourite) {
             favourite.setImageResource(R.drawable.ic_like)
         } else {
             favourite.setImageResource(R.drawable.ic_no_like)
-        }
+        }*/
     }
 }
 

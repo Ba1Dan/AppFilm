@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.academy.fundamentals.homework.features.data.Movie
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
-import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.domain.MoviesDataSource
 
 
 class FragmentMoviesList : Fragment(){
@@ -45,7 +44,7 @@ class FragmentMoviesList : Fragment(){
     }
 
     private fun updateData() {
-        adapter.bindMovies(MoviesDataSource().getMovies())
+        adapter.bindMovies(requireContext())
     }
 
     private val clickListener = object : ItemClickListener {
@@ -56,7 +55,7 @@ class FragmentMoviesList : Fragment(){
 
     private fun doOnClick(movie: Movie) {
         fragmentManager?.beginTransaction()?.apply {
-            replace(R.id.fl_main_activity, FragmentMoviesDetails())
+            add(R.id.fl_main_activity, FragmentMoviesDetails.getNewInstance(movie))
             addToBackStack(null)
             commit()
         }

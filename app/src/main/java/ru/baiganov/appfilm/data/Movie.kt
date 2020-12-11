@@ -1,13 +1,60 @@
-package ru.baiganov.appfilm.data
+package com.android.academy.fundamentals.homework.features.data
 
-import android.graphics.drawable.Drawable
+import android.os.Parcel
+import android.os.Parcelable
 
 data class Movie(
-        var poster: Int, // String
-        var favourite: Boolean,
-        var pg: String,
-        var name: String,
-        var tag: String,
-        var reviews: String,
-        var time: String
-        )
+    val id: Int,
+    val title: String,
+    val overview: String,
+    val poster: String,
+    val backdrop: String,
+    val ratings: Float,
+    val numberOfRatings: Int,
+    val minimumAge: Int,
+    val runtime: Int,
+    val genres: List<Genre>,
+    val actors: List<Actor>
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readFloat(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        TODO("genres"),
+        TODO("actors")
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(title)
+        parcel.writeString(overview)
+        parcel.writeString(poster)
+        parcel.writeString(backdrop)
+        parcel.writeFloat(ratings)
+        parcel.writeInt(numberOfRatings)
+        parcel.writeInt(minimumAge)
+        parcel.writeInt(runtime)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Movie> {
+        override fun createFromParcel(parcel: Parcel): Movie {
+            return Movie(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Movie?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+}
