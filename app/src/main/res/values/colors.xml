@@ -6,6 +6,7 @@
     <color name="black">#000000</color>
     <color name="bg_main">#191926</color>
     <color name="white">#FFFFFF</color>
+    <color name="main_bg">#191926</color>
 
     <color name="background">#191926</color>
     <color name="text_red">#FF3365</color>

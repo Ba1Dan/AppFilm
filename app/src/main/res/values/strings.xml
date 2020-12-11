@@ -13,4 +13,11 @@
     <string name="chris_evans">Chris Evans</string>
     <string name="chris_hemsworth">Chris Hemsworth</string>
     <string name="mark_ruffalo">Mark Ruffalo</string>
+    <string name="desc_poster_item">постер фильма</string>
+    <string name="desc_favourite">Избранное</string>
+    <string name="movies_list">Movies List</string>
+    <string name="ic_movie_list">знак фильмов</string>
+    <string name="desc_avatar_actor">фото актера</string>
+    <string name="movies_list">Movies List</string>
+    <string name="desc_ign">sign</string>
 </resources>
