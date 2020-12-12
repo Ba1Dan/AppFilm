@@ -1,5 +1,6 @@
 package ru.baiganov.appfilm.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,13 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.academy.fundamentals.homework.features.data.Movie
-import com.android.academy.fundamentals.homework.features.data.loadMovies
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.R
+import ru.baiganov.appfilm.data.Movie
+import ru.baiganov.appfilm.data.loadMovies
 
 class MoviesAdapter(
         private val listener: ItemClickListener
@@ -54,18 +55,19 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val reviews: TextView = itemView.findViewById(R.id.tv_reviews_item)
     private val genres: TextView = itemView.findViewById(R.id.tv_tag_item)
     private val pg: TextView = itemView.findViewById(R.id.tv_pg_item)
-    private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
+    //private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
     private val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
 
+    @SuppressLint("SetTextI18n")
     fun onBind(movie: Movie) {
         Glide.with(context)
             .load(movie.poster)
             .into(poster)
 
         name.text = movie.title
-        time.text = movie.runtime.toString() + " MIN"
-        reviews.text = movie.numberOfRatings.toString() + " REVIEWS"
-        pg.text = movie.minimumAge.toString() + "+"
+        time.text = movie.runtime.toString() + " " + context.getString(R.string.min)
+        reviews.text = movie.numberOfRatings.toString() + " " + context.getString(R.string.reviews)
+        pg.text = movie.minimumAge.toString() + context.getString(R.string.plus)
         var temp:String = movie.genres[0].name
         for (i in 1 until movie.genres.size) {
             temp = temp + ", " + movie.genres[i].name
@@ -84,7 +86,7 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 private val RecyclerView.ViewHolder.context
     get() = this.itemView.context
 
-interface ItemClickListener {
+fun interface ItemClickListener {
     fun onItemClick(movie: Movie)
 }
 

@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.academy.fundamentals.homework.features.data.Movie
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
+import ru.baiganov.appfilm.data.Movie
 
 
-class FragmentMoviesList : Fragment(){
+class FragmentMoviesList : Fragment() {
 
     private lateinit var adapter: MoviesAdapter
     private var recyclerMovies:RecyclerView? = null
@@ -47,11 +47,7 @@ class FragmentMoviesList : Fragment(){
         adapter.bindMovies(requireContext())
     }
 
-    private val clickListener = object : ItemClickListener {
-        override fun onItemClick(movie: Movie) {
-            doOnClick(movie)
-        }
-    }
+    private val clickListener = ItemClickListener { movie -> doOnClick(movie) }
 
     private fun doOnClick(movie: Movie) {
         fragmentManager?.beginTransaction()?.apply {

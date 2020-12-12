@@ -1,4 +1,4 @@
-package com.android.academy.fundamentals.homework.features.data
+package ru.baiganov.appfilm.data
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -28,8 +28,7 @@ data class Movie(
         parcel.readInt(),
         TODO("genres"),
         TODO("actors")
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

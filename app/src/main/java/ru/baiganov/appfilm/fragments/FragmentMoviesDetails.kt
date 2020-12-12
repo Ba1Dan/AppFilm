@@ -1,24 +1,21 @@
 package ru.baiganov.appfilm.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.academy.fundamentals.homework.features.data.Actor
-import com.android.academy.fundamentals.homework.features.data.Movie
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ActorsAdapter
-import ru.baiganov.appfilm.adapter.MoviesAdapter
+import ru.baiganov.appfilm.data.Actor
+import ru.baiganov.appfilm.data.Movie
 
 class FragmentMoviesDetails : Fragment() {
 
@@ -37,22 +34,29 @@ class FragmentMoviesDetails : Fragment() {
             val tvReviews: TextView = view.findViewById(R.id.tv_reviews)
             val ivBackDrop: ImageView = view.findViewById(R.id.iv_poster)
             val ratingBar: RatingBar = view.findViewById(R.id.rb_stars)
-            Glide.with(requireContext())
-                .load(movie.backdrop)
-                .into(ivBackDrop)
+            val cast: TextView = view.findViewById(R.id.tv_cast)
+
             tvTitle.text = movie.title
-            tvMinAge.text = movie.minimumAge.toString() + "+"
-            tvReviews.text = movie.numberOfRatings.toString() + " REVIEWS"
+            var temp:String = movie.minimumAge.toString() + requireContext().getString(R.string.plus)
+            tvMinAge.text = temp
+            temp = movie.numberOfRatings.toString() + " " + requireContext().getString(R.string.reviews)
+            tvReviews.text = temp
             tvStoryline.text = movie.overview
             ratingBar.rating = movie.ratings / 2
-            var temp:String = movie.genres[0].name
+            temp = movie.genres[0].name
             for (i in 1 until movie.genres.size) {
                 temp = temp + ", " + movie.genres[i].name
             }
             tvGenres.text = temp
             actors = movie.actors
-        }
+            if (movie.actors.isEmpty()) {
+                cast.isVisible = false
+            }
 
+            Glide.with(requireContext())
+                    .load(movie.backdrop)
+                    .into(ivBackDrop)
+        }
         return view
     }
 

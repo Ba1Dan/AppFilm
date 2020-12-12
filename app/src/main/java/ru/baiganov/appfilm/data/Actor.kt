@@ -1,4 +1,4 @@
-package com.android.academy.fundamentals.homework.features.data
+package ru.baiganov.appfilm.data
 
 data class Actor(
     val id: Int,
