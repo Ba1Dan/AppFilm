@@ -1,5 +1,6 @@
 package ru.baiganov.appfilm.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class FragmentMoviesDetails : Fragment() {
     private var recyclerActors: RecyclerView? = null
     private lateinit var actors: List<Actor>
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val movie: Movie? = arguments?.getParcelable<Movie>("movie")
         val view: View = inflater.inflate(R.layout.fragment_movies_details, container, false)
@@ -37,22 +39,23 @@ class FragmentMoviesDetails : Fragment() {
             val cast: TextView = view.findViewById(R.id.tv_cast)
 
             tvTitle.text = movie.title
-            var temp:String = movie.minimumAge.toString() + requireContext().getString(R.string.plus)
-            tvMinAge.text = temp
-            temp = movie.numberOfRatings.toString() + " " + requireContext().getString(R.string.reviews)
-            tvReviews.text = temp
+            tvMinAge.text = movie.minimumAge.toString() + requireContext().getString(R.string.plus)
+            tvReviews.text = movie.numberOfRatings.toString() + " " + requireContext().getString(R.string.reviews)
             tvStoryline.text = movie.overview
             ratingBar.rating = movie.ratings / 2
-            temp = movie.genres[0].name
-            for (i in 1 until movie.genres.size) {
-                temp = temp + ", " + movie.genres[i].name
+            var temp:String = ""
+            movie.genres.forEach {
+                temp = if (temp == "") {
+                    it.name
+                } else {
+                    "$temp,${it.name}"
+                }
             }
             tvGenres.text = temp
             actors = movie.actors
             if (movie.actors.isEmpty()) {
                 cast.isVisible = false
             }
-
             Glide.with(requireContext())
                     .load(movie.backdrop)
                     .into(ivBackDrop)

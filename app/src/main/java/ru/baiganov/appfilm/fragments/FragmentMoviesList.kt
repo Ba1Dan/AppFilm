@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.data.Movie
+import ru.baiganov.appfilm.data.loadMovies
 
 
 class FragmentMoviesList : Fragment() {
@@ -44,7 +48,10 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun updateData() {
-        adapter.bindMovies(requireContext())
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            adapter.bindMovies(loadMovies(requireContext()))
+        }
     }
 
     private val clickListener = ItemClickListener { movie -> doOnClick(movie) }

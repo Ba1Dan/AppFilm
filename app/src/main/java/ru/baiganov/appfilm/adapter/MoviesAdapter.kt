@@ -39,11 +39,8 @@ class MoviesAdapter(
         return movies.size
     }
 
-    fun bindMovies(context: Context) {
-        val scope = CoroutineScope(Dispatchers.IO)
-        scope.launch {
-            movies = loadMovies(context)
-        }
+    fun bindMovies(newMovies: List<Movie>) {
+       movies = newMovies
     }
 }
 
@@ -55,7 +52,6 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val reviews: TextView = itemView.findViewById(R.id.tv_reviews_item)
     private val genres: TextView = itemView.findViewById(R.id.tv_tag_item)
     private val pg: TextView = itemView.findViewById(R.id.tv_pg_item)
-    //private val favourite:ImageView = itemView.findViewById(R.id.iv_favourite_item)
     private val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
 
     @SuppressLint("SetTextI18n")
@@ -68,18 +64,16 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         time.text = movie.runtime.toString() + " " + context.getString(R.string.min)
         reviews.text = movie.numberOfRatings.toString() + " " + context.getString(R.string.reviews)
         pg.text = movie.minimumAge.toString() + context.getString(R.string.plus)
-        var temp:String = movie.genres[0].name
-        for (i in 1 until movie.genres.size) {
-            temp = temp + ", " + movie.genres[i].name
+        var temp:String = ""
+        movie.genres.forEach {
+            temp = if (temp == "") {
+                it.name
+            } else {
+                "$temp,${it.name}"
+            }
         }
         genres.text = temp
         ratingBar.rating = movie.ratings / 2
-
-        /*if (movie.favourite) {
-            favourite.setImageResource(R.drawable.ic_like)
-        } else {
-            favourite.setImageResource(R.drawable.ic_no_like)
-        }*/
     }
 }
 
