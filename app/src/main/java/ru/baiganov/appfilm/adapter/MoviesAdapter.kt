@@ -40,7 +40,8 @@ class MoviesAdapter(
     }
 
     fun bindMovies(newMovies: List<Movie>) {
-       movies = newMovies
+        movies = newMovies
+        notifyDataSetChanged()
     }
 }
 

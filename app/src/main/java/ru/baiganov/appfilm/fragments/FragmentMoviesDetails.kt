@@ -83,9 +83,7 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun updateData() {
-        adapter.apply {
-            onBindActors(actors)
-        }
+        adapter.onBindActors(actors)
     }
 
     companion object {
