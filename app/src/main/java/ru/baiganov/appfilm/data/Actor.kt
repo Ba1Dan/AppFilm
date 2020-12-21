@@ -1,6 +1,7 @@
 package ru.baiganov.appfilm.data
 
-data class Actor (
-        var name: String,
-        var avatar: Int
-        )
+data class Actor(
+    val id: Int,
+    val name: String,
+    val picture: String
+)

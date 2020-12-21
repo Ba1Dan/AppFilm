@@ -9,17 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.*
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.domain.MoviesDataSource
+import ru.baiganov.appfilm.data.loadMovies
 
 
-class FragmentMoviesList : Fragment(){
+class FragmentMoviesList : Fragment() {
 
     private lateinit var adapter: MoviesAdapter
-    private var recyclerMovies:RecyclerView? = null
+    private var recyclerMovies: RecyclerView? = null
+    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
@@ -37,6 +39,11 @@ class FragmentMoviesList : Fragment(){
         updateData()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
+    }
+
     private fun getColumns(): Int {
         val displayMetrics: DisplayMetrics = Resources.getSystem().displayMetrics
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
@@ -45,18 +52,19 @@ class FragmentMoviesList : Fragment(){
     }
 
     private fun updateData() {
-        adapter.bindMovies(MoviesDataSource().getMovies())
-    }
-
-    private val clickListener = object : ItemClickListener {
-        override fun onItemClick(movie: Movie) {
-            doOnClick(movie)
+        scope.launch {
+            val data = loadMovies(requireContext())
+            withContext(Dispatchers.Main) {
+                adapter.bindMovies(data)
+            }
         }
     }
 
+    private val clickListener = ItemClickListener { movie -> doOnClick(movie) }
+
     private fun doOnClick(movie: Movie) {
         fragmentManager?.beginTransaction()?.apply {
-            replace(R.id.fl_main_activity, FragmentMoviesDetails())
+            add(R.id.fl_main_activity, FragmentMoviesDetails.getNewInstance(movie))
             addToBackStack(null)
             commit()
         }

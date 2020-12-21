@@ -1,13 +1,20 @@
 package ru.baiganov.appfilm.data
 
-import android.graphics.drawable.Drawable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class Movie(
-        var poster: Int, // String
-        var favourite: Boolean,
-        var pg: String,
-        var name: String,
-        var tag: String,
-        var reviews: String,
-        var time: String
-        )
+    val id: Int,
+    val title: String,
+    val overview: String,
+    val poster: String,
+    val backdrop: String,
+    val ratings: Float,
+    val numberOfRatings: Int,
+    val minimumAge: Int,
+    val runtime: Int,
+    val genres: @RawValue List<Genre>,
+    val actors: @RawValue List<Actor>
+) : Parcelable
