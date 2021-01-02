@@ -7,25 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.*
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.data.loadMovies
-import ru.baiganov.appfilm.screens.movies.MoviesViewModel
+import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
+import ru.baiganov.appfilm.screens.AssetMovieRepo
+import ru.baiganov.appfilm.screens.movies.MoviesListFactory
+import ru.baiganov.appfilm.screens.movies.MoviesListViewModel
 
 
 class FragmentMoviesList : Fragment() {
 
     private lateinit var adapter: MoviesAdapter
-    private lateinit var viewModel: MoviesViewModel
+    private lateinit var viewModel: MoviesListViewModel
     private lateinit var recyclerMovies: RecyclerView
+    private lateinit var binding: FragmentMoviesListBinding
     private val clickListener = ItemClickListener { movie -> doOnClick(movie) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,18 +35,17 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-
-        viewModel.movies.observe(this, Observer {
+        viewModel = ViewModelProvider(this, MoviesListFactory(AssetMovieRepo(requireContext()))).get(
+                MoviesListViewModel::class.java
+        )
+        viewModel.movieList.observe(this, Observer {
             updateAdapter(it)
         })
     }
 
     private fun initViews(view: View) {
-        recyclerMovies = view.findViewById(R.id.rv_movies)
-        val application = activity?.application
-        if (application != null) {
-            viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(MoviesViewModel::class.java)
-        }
+        binding = FragmentMoviesListBinding.bind(view)
+        recyclerMovies = binding.rvMovies
         adapter = MoviesAdapter(clickListener)
         recyclerMovies.layoutManager = GridLayoutManager(requireContext(), getColumns())
         recyclerMovies.adapter = adapter
