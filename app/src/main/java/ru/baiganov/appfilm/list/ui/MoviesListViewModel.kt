@@ -1,11 +1,11 @@
-package ru.baiganov.appfilm.screens.movies
+package ru.baiganov.appfilm.list.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.screens.MoviesRepository
+import ru.baiganov.appfilm.list.data.MoviesRepository
 
 class MoviesListViewModel (private val repository: MoviesRepository) : ViewModel() {
 

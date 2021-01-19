@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.fragments
+package ru.baiganov.appfilm.list.ui
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -16,9 +16,8 @@ import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.data.Movie
 import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
-import ru.baiganov.appfilm.screens.AssetMovieRepo
-import ru.baiganov.appfilm.screens.movies.MoviesListFactory
-import ru.baiganov.appfilm.screens.movies.MoviesListViewModel
+import ru.baiganov.appfilm.detail.ui.FragmentMoviesDetails
+import ru.baiganov.appfilm.list.data.AssetMovieRepo
 
 
 class FragmentMoviesList : Fragment() {

@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.screens
+package ru.baiganov.appfilm.list.data
 
 import ru.baiganov.appfilm.data.Movie
 

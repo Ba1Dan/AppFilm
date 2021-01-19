@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.fragments
+package ru.baiganov.appfilm.detail.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,14 +16,11 @@ import ru.baiganov.appfilm.adapter.ActorsAdapter
 import ru.baiganov.appfilm.data.Actor
 import ru.baiganov.appfilm.data.Movie
 import ru.baiganov.appfilm.databinding.FragmentMoviesDetailsBinding
-import ru.baiganov.appfilm.screens.moviesdeatails.MoviesDetailsFactory
-import ru.baiganov.appfilm.screens.moviesdeatails.MoviesDetailsViewModel
 
 class FragmentMoviesDetails : Fragment() {
 
     private lateinit var adapter: ActorsAdapter
     private lateinit var recyclerActors: RecyclerView
-    private lateinit var actors: List<Actor>
     private lateinit var viewModelFactory: MoviesDetailsFactory
     private lateinit var binding: FragmentMoviesDetailsBinding
 
@@ -35,13 +32,7 @@ class FragmentMoviesDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMoviesDetailsBinding.bind(view)
-        recyclerActors = binding.rvActors
-        adapter = ActorsAdapter()
-        recyclerActors.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerActors.adapter = adapter
-        super.onViewCreated(view, savedInstanceState)
-        recyclerActors = binding.rvActors
-        recyclerActors.adapter = adapter
+        initRecycler()
         binding.tvBack.setOnClickListener {
             fragmentManager?.popBackStack()
         }
@@ -51,13 +42,21 @@ class FragmentMoviesDetails : Fragment() {
         val viewModelMovie = ViewModelProvider(
                 this, viewModelFactory
         ).get(MoviesDetailsViewModel::class.java)
-        viewModelMovie.movie.observe(viewLifecycleOwner) {
+        viewModelMovie.movies.observe(viewLifecycleOwner) {
             bindMovie(it)
         }
         viewModelMovie.actors.observe(viewLifecycleOwner) {
             adapter.bindActors(it)
         }
     }
+
+    private fun initRecycler() {
+        recyclerActors = binding.rvActors
+        adapter = ActorsAdapter()
+        recyclerActors.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerActors.adapter = adapter
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun bindMovie(movie: Movie) {
@@ -75,7 +74,6 @@ class FragmentMoviesDetails : Fragment() {
             }
         }
         binding.tvTag.text = temp
-        actors = movie.actors
         if (movie.actors.isEmpty()) {
             binding.tvCast.isVisible = false
         }
@@ -85,7 +83,7 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     companion object {
-        fun getNewInstance(movie: Movie):FragmentMoviesDetails {
+        fun getNewInstance(movie: Movie): FragmentMoviesDetails {
             val bundle = Bundle()
             bundle.putParcelable("movie", movie)
             val fragment = FragmentMoviesDetails()

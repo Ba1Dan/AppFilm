@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.screens.moviesdeatails
+package ru.baiganov.appfilm.detail.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

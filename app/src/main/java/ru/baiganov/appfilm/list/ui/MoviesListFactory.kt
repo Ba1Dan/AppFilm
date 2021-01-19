@@ -1,8 +1,8 @@
-package ru.baiganov.appfilm.screens.movies
+package ru.baiganov.appfilm.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.baiganov.appfilm.screens.MoviesRepository
+import ru.baiganov.appfilm.list.data.MoviesRepository
 
 class MoviesListFactory(private val repository: MoviesRepository) : ViewModelProvider.NewInstanceFactory() {
 

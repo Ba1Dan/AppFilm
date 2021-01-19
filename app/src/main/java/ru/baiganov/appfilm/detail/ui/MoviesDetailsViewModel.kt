@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.screens.moviesdeatails
+package ru.baiganov.appfilm.detail.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import ru.baiganov.appfilm.data.Actor
 import ru.baiganov.appfilm.data.Movie
 
-class MoviesDetailsViewModel(private val movies: Movie) :
-        ViewModel() {
+class MoviesDetailsViewModel(private val movie: Movie) : ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie> = _movie
+    val movies: LiveData<Movie> = _movie
     private val _actors = MutableLiveData<List<Actor>>()
     val actors: LiveData<List<Actor>> = _actors
 
@@ -19,10 +18,10 @@ class MoviesDetailsViewModel(private val movies: Movie) :
     }
 
     private fun loadMovie() {
-        if (movie.value != null) {
+        if (movies.value != null) {
             return
         }
-        _movie.value = movies
-        _actors.value = movie.value?.actors
+        _movie.value = movie
+        _actors.value = movie.actors
     }
 }
