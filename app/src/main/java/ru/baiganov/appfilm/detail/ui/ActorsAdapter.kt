@@ -20,14 +20,14 @@ class ActorsAdapter: RecyclerView.Adapter<ActorsViewHolder>() {
 
     override fun onBindViewHolder(holder: ActorsViewHolder, position: Int) {
         val currentItem = actors[position]
-        holder.onBind(currentItem)
+        holder.bind(currentItem)
     }
 
     override fun getItemCount(): Int {
         return actors.size
     }
 
-    fun onBindActors(newActors:List<Actor>) {
+    fun bindActors(newActors:List<Actor>) {
         actors = newActors
     }
 }
@@ -37,7 +37,7 @@ class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val avatar:ImageView = itemView.findViewById(R.id.iv_avatar)
     private val name:TextView = itemView.findViewById(R.id.tv_full_name)
 
-    fun onBind(actor: Actor) {
+    fun bind(actor: Actor) {
         name.text = actor.name
         Glide.with(context)
             .load(actor.picture)

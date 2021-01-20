@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.fragments
+package ru.baiganov.appfilm.list.ui
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -7,41 +7,47 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.*
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ItemClickListener
 import ru.baiganov.appfilm.adapter.MoviesAdapter
 import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.data.loadMovies
+import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
+import ru.baiganov.appfilm.detail.ui.FragmentMoviesDetails
+import ru.baiganov.appfilm.list.data.AssetMovieRepo
 
 
 class FragmentMoviesList : Fragment() {
 
     private lateinit var adapter: MoviesAdapter
-    private var recyclerMovies: RecyclerView? = null
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    private lateinit var viewModel: MoviesListViewModel
+    private lateinit var recyclerMovies: RecyclerView
+    private lateinit var binding: FragmentMoviesListBinding
+    private val clickListener = ItemClickListener { movie -> doOnClick(movie) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerMovies = view.findViewById(R.id.rv_movies)
+        initViews(view)
+        viewModel = ViewModelProvider(this, MoviesListFactory(AssetMovieRepo(requireContext()))).get(
+                MoviesListViewModel::class.java
+        )
+        viewModel.movieList.observe(this, Observer {
+            updateAdapter(it)
+        })
+    }
+
+    private fun initViews(view: View) {
+        binding = FragmentMoviesListBinding.bind(view)
+        recyclerMovies = binding.rvMovies
         adapter = MoviesAdapter(clickListener)
-        recyclerMovies?.layoutManager = GridLayoutManager(requireContext(), getColumns())
-        recyclerMovies?.adapter = adapter
-    }
-
-    override fun onStart() {
-        super.onStart()
-        updateData()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
+        recyclerMovies.layoutManager = GridLayoutManager(requireContext(), getColumns())
+        recyclerMovies.adapter = adapter
     }
 
     private fun getColumns(): Int {
@@ -51,16 +57,9 @@ class FragmentMoviesList : Fragment() {
         return (dpWidth / scalingFactor).toInt()
     }
 
-    private fun updateData() {
-        scope.launch {
-            val data = loadMovies(requireContext())
-            withContext(Dispatchers.Main) {
-                adapter.bindMovies(data)
-            }
-        }
+    private fun updateAdapter(movies: List<Movie>) {
+        adapter.bindMovies(movies)
     }
-
-    private val clickListener = ItemClickListener { movie -> doOnClick(movie) }
 
     private fun doOnClick(movie: Movie) {
         fragmentManager?.beginTransaction()?.apply {

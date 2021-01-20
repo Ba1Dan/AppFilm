@@ -2,7 +2,7 @@ package ru.baiganov.appfilm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.baiganov.appfilm.fragments.FragmentMoviesList
+import ru.baiganov.appfilm.list.ui.FragmentMoviesList
 
 class MainActivity : AppCompatActivity() {
 
