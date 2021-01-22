@@ -1,12 +1,12 @@
 package ru.baiganov.appfilm.list.data
 
-import android.content.Context
-import ru.baiganov.appfilm.data.Movie
-import ru.baiganov.appfilm.data.loadMovies
-import ru.baiganov.appfilm.list.data.MoviesRepository
+import ru.baiganov.appfilm.api.ApiFactory.apiService
 
-class AssetMovieRepo(private val context: Context) : MoviesRepository {
+import ru.baiganov.appfilm.pojo.Movie
+
+class AssetMovieRepo() : MoviesRepository {
     override suspend fun getMovies(): List<Movie> {
-        return loadMovies(context)
+        return apiService.getPopularMovies().movies
+        //return loadMovies(context)
     }
 }

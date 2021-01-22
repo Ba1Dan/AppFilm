@@ -1,5 +1,6 @@
 package ru.baiganov.appfilm.list.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,7 +23,8 @@ class MoviesListViewModel (private val repository: MoviesRepository) : ViewModel
         }
         viewModelScope.launch {
             val movies = repository.getMovies()
-            movieList.value = movies
+            Log.i("TEST", movies.toString())
+            //movieList.value = movies
         }
     }
 }

@@ -34,12 +34,12 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        viewModel = ViewModelProvider(this, MoviesListFactory(AssetMovieRepo(requireContext()))).get(
+        viewModel = ViewModelProvider(this, MoviesListFactory(AssetMovieRepo())).get(
                 MoviesListViewModel::class.java
         )
-        viewModel.movieList.observe(this, Observer {
+        /*viewModel.movieList.observe(this, Observer {
             updateAdapter(it)
-        })
+        })*/
     }
 
     private fun initViews(view: View) {
