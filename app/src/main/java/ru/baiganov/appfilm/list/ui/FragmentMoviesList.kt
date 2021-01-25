@@ -35,6 +35,9 @@ class FragmentMoviesList : Fragment() {
         viewModel = ViewModelProvider(this, MoviesListFactory(NetworkMovieRepo())).get(
                 MoviesListViewModel::class.java
         )
+        viewModel.isLoading.observe(this, Observer {
+            binding.pbMovies.visibility = if(it) View.VISIBLE else View.GONE
+        })
         viewModel.movieList.observe(this, Observer {
             updateAdapter(it)
         })
