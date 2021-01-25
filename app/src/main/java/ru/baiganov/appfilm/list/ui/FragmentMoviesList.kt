@@ -12,12 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.baiganov.appfilm.R
-import ru.baiganov.appfilm.adapter.ItemClickListener
-import ru.baiganov.appfilm.adapter.MoviesAdapter
-import ru.baiganov.appfilm.data.Movie
 import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
 import ru.baiganov.appfilm.detail.ui.FragmentMoviesDetails
-import ru.baiganov.appfilm.list.data.AssetMovieRepo
+import ru.baiganov.appfilm.list.data.NetworkMovieRepo
+import ru.baiganov.appfilm.pojo.Movie
 
 
 class FragmentMoviesList : Fragment() {
@@ -34,12 +32,12 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        viewModel = ViewModelProvider(this, MoviesListFactory(AssetMovieRepo())).get(
+        viewModel = ViewModelProvider(this, MoviesListFactory(NetworkMovieRepo())).get(
                 MoviesListViewModel::class.java
         )
-        /*viewModel.movieList.observe(this, Observer {
+        viewModel.movieList.observe(this, Observer {
             updateAdapter(it)
-        })*/
+        })
     }
 
     private fun initViews(view: View) {

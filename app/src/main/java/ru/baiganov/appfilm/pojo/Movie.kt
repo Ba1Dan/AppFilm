@@ -1,36 +1,32 @@
 package ru.baiganov.appfilm.pojo
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Parcelize
 @Serializable
 data class Movie(
         @SerialName("id")
         val id: Int,
-        @SerialName("poster_path")
-        val posterPath: String,
         @SerialName("adult")
         val adult: Boolean,
-        @SerialName("overview")
-        val overview: String,
-        @SerialName("release_date")
-        val releaseDate: String,
-        @SerialName("genre_ids")
-        val genres: List<Int>,
-        @SerialName("original_title")
-        val originalTitle: String,
-        @SerialName("original_language")
-        val originalLanguage: String,
         @SerialName("title")
         val title: String,
+        @SerialName("genres")
+        val genres: @RawValue List<Genre>,
+        @SerialName("poster_path")
+        var poster: String,
         @SerialName("backdrop_path")
-        val backdropPath: String,
-        @SerialName("popularity")
-        val popularity: Double,
-        @SerialName("vote_count")
-        val voteCount: Int,
-        @SerialName("video")
-        val video: Boolean,
+        var backdrop: String,
+        @SerialName("overview")
+        val overview: String,
         @SerialName("vote_average")
-        val voteAverage: Double
-)
+        val ratings: Float,
+        @SerialName("runtime")
+        val runtime: Int,
+        @SerialName("vote_count")
+        val voteCount: Int
+) : Parcelable
