@@ -1,14 +1,22 @@
 package ru.baiganov.appfilm.list.data
 
+import android.content.Context
+import androidx.lifecycle.LiveData
 import ru.baiganov.appfilm.api.ApiFactory.apiService
 import ru.baiganov.appfilm.api.ApiService
+import ru.baiganov.appfilm.database.AppDatabase
 
 import ru.baiganov.appfilm.pojo.Movie
 import ru.baiganov.appfilm.pojo.MoviePopular
 
 private const val ORIGINAL = "original"
 
-class NetworkMovieRepo(private val apiService: ApiService) : MoviesRepository {
+class NetworkMovieRepo(
+    private val apiService: ApiService,
+    private val applicationContext: Context
+) : MoviesRepository {
+
+    private val database = AppDatabase.create(applicationContext)
 
     override suspend fun getMovies(): List<Movie> {
         val movies = apiService.getPopularMovies().movies
@@ -26,5 +34,13 @@ class NetworkMovieRepo(private val apiService: ApiService) : MoviesRepository {
         movie.backdrop = fullBackdropUrl
         movie.poster = fullPoster
         return movie
+    }
+
+    override suspend fun getMoviesFromDatabase(): LiveData<List<Movie>> {
+        return database.moviesDao().getData()
+    }
+
+    override suspend fun insertDataInDatabase(moviesList: List<Movie>) {
+        database.moviesDao().insertData(moviesList)
     }
 }

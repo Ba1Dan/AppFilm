@@ -1,14 +1,21 @@
 package ru.baiganov.appfilm.pojo
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.baiganov.appfilm.converters.Converter
 
+@Entity(tableName = "movies_list")
+@TypeConverters(value = [Converter::class])
 @Parcelize
 @Serializable
 data class Movie(
+        @PrimaryKey
         @SerialName("id")
         val id: Int,
         @SerialName("adult")

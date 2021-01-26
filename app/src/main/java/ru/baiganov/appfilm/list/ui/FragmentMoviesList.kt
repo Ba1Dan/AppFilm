@@ -33,7 +33,9 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        viewModel = ViewModelProvider(this, MoviesListFactory(NetworkMovieRepo(ApiFactory.apiService))).get(
+        viewModel = ViewModelProvider(this, MoviesListFactory(
+            applicationContext =  requireContext(),
+            apiService = ApiFactory.apiService)).get(
                 MoviesListViewModel::class.java
         )
         viewModel.isLoading.observe(this, {
