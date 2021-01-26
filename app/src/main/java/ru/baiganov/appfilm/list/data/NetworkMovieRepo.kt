@@ -1,13 +1,15 @@
 package ru.baiganov.appfilm.list.data
 
 import ru.baiganov.appfilm.api.ApiFactory.apiService
+import ru.baiganov.appfilm.api.ApiService
 
 import ru.baiganov.appfilm.pojo.Movie
 import ru.baiganov.appfilm.pojo.MoviePopular
 
 private const val ORIGINAL = "original"
 
-class NetworkMovieRepo() : MoviesRepository {
+class NetworkMovieRepo(private val apiService: ApiService) : MoviesRepository {
+
     override suspend fun getMovies(): List<Movie> {
         val movies = apiService.getPopularMovies().movies
 

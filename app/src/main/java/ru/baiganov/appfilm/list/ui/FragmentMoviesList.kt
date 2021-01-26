@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.baiganov.appfilm.R
+import ru.baiganov.appfilm.api.ApiFactory
 import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
 import ru.baiganov.appfilm.detail.ui.FragmentMoviesDetails
 import ru.baiganov.appfilm.list.data.NetworkMovieRepo
@@ -32,13 +33,13 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        viewModel = ViewModelProvider(this, MoviesListFactory(NetworkMovieRepo())).get(
+        viewModel = ViewModelProvider(this, MoviesListFactory(NetworkMovieRepo(ApiFactory.apiService))).get(
                 MoviesListViewModel::class.java
         )
-        viewModel.isLoading.observe(this, Observer {
+        viewModel.isLoading.observe(this, {
             binding.pbMovies.visibility = if(it) View.VISIBLE else View.GONE
         })
-        viewModel.movieList.observe(this, Observer {
+        viewModel.movieList.observe(this, {
             updateAdapter(it)
         })
     }

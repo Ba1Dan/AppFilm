@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ActorsAdapter
+import ru.baiganov.appfilm.api.ApiFactory
 import ru.baiganov.appfilm.databinding.FragmentMoviesDetailsBinding
 import ru.baiganov.appfilm.detail.data.NetworkActorRepo
 import ru.baiganov.appfilm.pojo.Movie
@@ -41,7 +42,7 @@ class FragmentMoviesDetails : Fragment() {
         viewModelFactory = arguments?.getParcelable<Movie>("movie")?.let { movie ->  
             MoviesDetailsFactory(
                     movie,
-                    NetworkActorRepo()
+                    NetworkActorRepo(ApiFactory.apiService)
             )
         }!!
 
