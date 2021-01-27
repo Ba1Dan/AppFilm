@@ -8,7 +8,7 @@ import ru.baiganov.appfilm.pojo.Movie
 interface MoviesDao {
 
     @Query("SELECT * FROM movies_list")
-    fun getData(): LiveData<List<Movie>>
+    fun getData(): List<Movie>
 
     @Query("DELETE FROM movies_list")
     fun deleteAllData()

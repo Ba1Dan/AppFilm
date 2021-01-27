@@ -24,7 +24,9 @@ class MoviesListViewModel (private val repository: MoviesRepository) : ViewModel
     private fun loadMovieJson() {
         viewModelScope.launch {
             _isLoading.value = true
-            val movies = repository.getMovies()
+            val movies = repository.getMoviesFromDatabase()
+                //repository.getMovies()
+            //repository.insertDataInDatabase(movies)
             _isLoading.value = false
             _mutableMovies.value = movies
         }

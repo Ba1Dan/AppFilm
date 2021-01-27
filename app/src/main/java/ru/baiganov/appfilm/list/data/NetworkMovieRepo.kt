@@ -2,6 +2,8 @@ package ru.baiganov.appfilm.list.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ru.baiganov.appfilm.api.ApiFactory.apiService
 import ru.baiganov.appfilm.api.ApiService
 import ru.baiganov.appfilm.database.AppDatabase
@@ -36,11 +38,11 @@ class NetworkMovieRepo(
         return movie
     }
 
-    override suspend fun getMoviesFromDatabase(): LiveData<List<Movie>> {
-        return database.moviesDao().getData()
+    override suspend fun getMoviesFromDatabase() : List<Movie> = withContext(Dispatchers.IO) {
+        return@withContext database.moviesDao().getData()
     }
 
-    override suspend fun insertDataInDatabase(moviesList: List<Movie>) {
+    override suspend fun insertDataInDatabase(moviesList: List<Movie>) = withContext(Dispatchers.IO) {
         database.moviesDao().insertData(moviesList)
     }
 }

@@ -9,9 +9,10 @@ import kotlinx.android.parcel.RawValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.baiganov.appfilm.converters.Converter
+import kotlin.reflect.KClass
 
 @Entity(tableName = "movies_list")
-@TypeConverters(value = [Converter::class])
+@TypeConverters(Converter::class)
 @Parcelize
 @Serializable
 data class Movie(

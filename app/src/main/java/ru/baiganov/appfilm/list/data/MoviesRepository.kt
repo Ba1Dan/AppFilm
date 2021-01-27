@@ -11,7 +11,7 @@ interface MoviesRepository {
 
     suspend fun getMovie(id: Int): Movie
 
-    suspend fun getMoviesFromDatabase(): LiveData<List<Movie>>
+    suspend fun getMoviesFromDatabase(): List<Movie>
 
     suspend fun insertDataInDatabase(moviesList: List<Movie>)
 
