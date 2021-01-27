@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
-import ru.baiganov.appfilm.data.Actor
+import ru.baiganov.appfilm.pojo.Actor
 
 class ActorsAdapter: RecyclerView.Adapter<ActorsViewHolder>() {
 
@@ -29,6 +29,7 @@ class ActorsAdapter: RecyclerView.Adapter<ActorsViewHolder>() {
 
     fun bindActors(newActors:List<Actor>) {
         actors = newActors
+        notifyDataSetChanged()
     }
 }
 
@@ -40,7 +41,7 @@ class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(actor: Actor) {
         name.text = actor.name
         Glide.with(context)
-            .load(actor.picture)
+            .load(actor.actorImageUrl)
             .into(avatar)
     }
 }

@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.adapter
+package ru.baiganov.appfilm.list.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
-import ru.baiganov.appfilm.data.Movie
 import ru.baiganov.appfilm.databinding.ViewHolderMovieBinding
+import ru.baiganov.appfilm.pojo.Movie
 
 class MoviesAdapter (
     private val listener: ItemClickListener
@@ -49,8 +49,8 @@ class MoviesViewHolder(private val binding: ViewHolderMovieBinding) :
 
         binding.tvNameItem.text = movie.title
         binding.tvTime.text = movie.runtime.toString() + " " + context.getString(R.string.min)
-        binding.tvReviewsItem.text = movie.numberOfRatings.toString() + " " + context.getString(R.string.reviews)
-        binding.tvPgItem.text = movie.minimumAge.toString() + context.getString(R.string.plus)
+        binding.tvReviewsItem.text = movie.voteCount.toString() + " " + context.getString(R.string.reviews)
+        binding.tvPgItem.text = /*movie.minimumAge.toString() +*/ context.getString(R.string.plus)
         var temp:String = ""
         movie.genres.forEach {
             temp = if (temp == "") {

@@ -1,12 +1,19 @@
 package ru.baiganov.appfilm.detail.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.baiganov.appfilm.data.Actor
-import ru.baiganov.appfilm.data.Movie
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import ru.baiganov.appfilm.detail.data.ActorsRepository
+import ru.baiganov.appfilm.pojo.Actor
+import ru.baiganov.appfilm.pojo.Movie
 
-class MoviesDetailsViewModel(private val movie: Movie) : ViewModel() {
+class MoviesDetailsViewModel(
+        private val movie: Movie,
+        private val actorsRepository: ActorsRepository,
+        ) : ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movies: LiveData<Movie> = _movie
@@ -18,10 +25,10 @@ class MoviesDetailsViewModel(private val movie: Movie) : ViewModel() {
     }
 
     private fun loadMovie() {
-        if (movies.value != null) {
-            return
+        viewModelScope.launch {
+            _movie.value = movie
+            _actors.postValue(actorsRepository.getActors(movie.id))
+            Log.i("data", _actors.toString())
         }
-        _movie.value = movie
-        _actors.value = movie.actors
     }
 }

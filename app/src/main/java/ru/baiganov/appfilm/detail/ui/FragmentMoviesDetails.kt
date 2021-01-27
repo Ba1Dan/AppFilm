@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ActorsAdapter
-import ru.baiganov.appfilm.data.Actor
-import ru.baiganov.appfilm.data.Movie
+import ru.baiganov.appfilm.api.ApiFactory
 import ru.baiganov.appfilm.databinding.FragmentMoviesDetailsBinding
+import ru.baiganov.appfilm.detail.data.NetworkActorRepo
+import ru.baiganov.appfilm.pojo.Movie
 
 class FragmentMoviesDetails : Fragment() {
 
@@ -33,18 +34,26 @@ class FragmentMoviesDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMoviesDetailsBinding.bind(view)
         initRecycler()
+
         binding.tvBack.setOnClickListener {
             fragmentManager?.popBackStack()
         }
-        viewModelFactory = MoviesDetailsFactory(
-                arguments?.getParcelable<Movie>("movie")?.let { (it) }!!
-        )
+
+        viewModelFactory = arguments?.getParcelable<Movie>("movie")?.let { movie ->  
+            MoviesDetailsFactory(
+                    movie,
+                    NetworkActorRepo(ApiFactory.apiService)
+            )
+        }!!
+
         val viewModelMovie = ViewModelProvider(
                 this, viewModelFactory
         ).get(MoviesDetailsViewModel::class.java)
+
         viewModelMovie.movies.observe(viewLifecycleOwner) {
             bindMovie(it)
         }
+
         viewModelMovie.actors.observe(viewLifecycleOwner) {
             adapter.bindActors(it)
         }
@@ -57,12 +66,11 @@ class FragmentMoviesDetails : Fragment() {
         recyclerActors.adapter = adapter
     }
 
-
     @SuppressLint("SetTextI18n")
     private fun bindMovie(movie: Movie) {
         binding.tvName.text = movie.title
-        binding.tvPg.text = movie.minimumAge.toString() + requireContext().getString(R.string.plus)
-        binding.tvReviews.text = movie.numberOfRatings.toString() + " " + requireContext().getString(R.string.reviews)
+        binding.tvPg.text = /*movie.minimumAge.toString()+ */ requireContext().getString(R.string.plus)
+        binding.tvReviews.text = movie.voteCount.toString() + " " + requireContext().getString(R.string.reviews)
         binding.tvStoryline.text = movie.overview
         binding.rbStars.rating = movie.ratings / 2
         var temp:String = ""
@@ -74,9 +82,9 @@ class FragmentMoviesDetails : Fragment() {
             }
         }
         binding.tvTag.text = temp
-        if (movie.actors.isEmpty()) {
+        /*if (movie.actors.isEmpty()) {
             binding.tvCast.isVisible = false
-        }
+        }*/
         Glide.with(requireContext())
                 .load(movie.backdrop)
                 .into(binding.ivPoster)
