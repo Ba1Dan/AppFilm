@@ -42,7 +42,7 @@ class FragmentMoviesDetails : Fragment() {
         viewModelFactory = arguments?.getParcelable<Movie>("movie")?.let { movie ->  
             MoviesDetailsFactory(
                     movie,
-                    NetworkActorRepo(ApiFactory.apiService)
+                    requireContext(),
             )
         }!!
 

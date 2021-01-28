@@ -12,7 +12,7 @@ import ru.baiganov.appfilm.pojo.Movie
 
 class MoviesDetailsViewModel(
         private val movie: Movie,
-        private val actorsRepository: ActorsRepository,
+        private val repository: ActorsRepository
         ) : ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
@@ -27,8 +27,8 @@ class MoviesDetailsViewModel(
     private fun loadMovie() {
         viewModelScope.launch {
             _movie.value = movie
-            _actors.postValue(actorsRepository.getActors(movie.id))
-            Log.i("data", _actors.toString())
+            val actorsList = repository.getActorsFromDatabase(movie.id)
+            _actors.postValue(actorsList.actors)
         }
     }
 }

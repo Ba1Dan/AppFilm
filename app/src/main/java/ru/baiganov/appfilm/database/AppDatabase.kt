@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.baiganov.appfilm.pojo.ActorsList
 import ru.baiganov.appfilm.pojo.Movie
 
-@Database(entities = [Movie::class], version = 1, exportSchema = false)
+@Database(entities = [Movie::class, ActorsList::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
@@ -22,7 +23,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     DB_NAME
-                ).build()
+                )
+                        .fallbackToDestructiveMigration()
+                        .build()
                 db = instance
                 return instance
             }
@@ -30,4 +33,5 @@ abstract class AppDatabase : RoomDatabase() {
     }
 
     abstract fun moviesDao(): MoviesDao
+    abstract fun actorsDao(): ActorsDao
 }
