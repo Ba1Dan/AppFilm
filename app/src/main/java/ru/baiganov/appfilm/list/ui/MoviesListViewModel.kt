@@ -8,7 +8,7 @@ import ru.baiganov.appfilm.list.data.MoviesRepository
 import ru.baiganov.appfilm.pojo.Movie
 import ru.baiganov.appfilm.utlils.checkNetwork
 
-class MoviesListViewModel (
+class MoviesListViewModel(
         private val repository: MoviesRepository,
         application: Application
         ) : AndroidViewModel(application) {

@@ -36,12 +36,12 @@ class FragmentMoviesList : Fragment() {
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        val database = AppDatabase.create(requireContext())
+        val database: AppDatabase = AppDatabase.create(requireContext())
         val application: Application = activity?.application!!
 
         viewModel = ViewModelProvider(this, MoviesListFactory(
-                moviesDao = database.moviesDao(),
-                actorsDao = database.actorsDao(),
+                moviesDao = database?.moviesDao(),
+                actorsDao = database?.actorsDao(),
                 apiService = ApiFactory.apiService,
                 application = application
         )

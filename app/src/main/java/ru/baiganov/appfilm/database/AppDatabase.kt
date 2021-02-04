@@ -11,22 +11,24 @@ import ru.baiganov.appfilm.pojo.Movie
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
-
-        private var db: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
         private const val DB_NAME = "main.db"
         private val LOCK = Any()
 
         fun create(context: Context): AppDatabase {
-            synchronized(LOCK) {
-                db?.let { return it}
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    DB_NAME
-                )
-                        .fallbackToDestructiveMigration()
+                        context.applicationContext,
+                        AppDatabase::class.java,
+                        DB_NAME
+                ).fallbackToDestructiveMigration()
                         .build()
-                db = instance
+                INSTANCE = instance
                 return instance
             }
         }
