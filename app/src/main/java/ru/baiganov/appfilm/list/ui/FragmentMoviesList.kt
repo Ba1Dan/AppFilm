@@ -40,8 +40,8 @@ class FragmentMoviesList : Fragment() {
         val application: Application = activity?.application!!
 
         viewModel = ViewModelProvider(this, MoviesListFactory(
-                moviesDao = database?.moviesDao(),
-                actorsDao = database?.actorsDao(),
+                moviesDao = database.moviesDao(),
+                actorsDao = database.actorsDao(),
                 apiService = ApiFactory.apiService,
                 application = application
         )
