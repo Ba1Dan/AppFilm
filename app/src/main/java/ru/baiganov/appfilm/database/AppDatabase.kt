@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import ru.baiganov.appfilm.pojo.ActorsList
 import ru.baiganov.appfilm.pojo.Movie
 
-@Database(entities = [Movie::class, ActorsList::class], version = 2, exportSchema = false)
+@Database(entities = [Movie::class, ActorsList::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

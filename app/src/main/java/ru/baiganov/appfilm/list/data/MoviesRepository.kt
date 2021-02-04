@@ -1,11 +1,7 @@
 package ru.baiganov.appfilm.list.data
 
-
-import androidx.lifecycle.LiveData
-import ru.baiganov.appfilm.pojo.Actor
 import ru.baiganov.appfilm.pojo.ActorsList
 import ru.baiganov.appfilm.pojo.Movie
-import ru.baiganov.appfilm.pojo.MoviePopular
 
 interface MoviesRepository {
 
@@ -15,11 +11,11 @@ interface MoviesRepository {
 
     suspend fun getMoviesFromDatabase(): List<Movie>
 
-    suspend fun insertDataInDatabase(moviesList: List<Movie>)
+    suspend fun insertMovies(moviesList: List<Movie>)
 
-    suspend fun insertActorsInDatabase(actorsList: ActorsList)
+    suspend fun insertActors(actorsList: ActorsList)
 
-    suspend fun getActorsFromNetwork(id: Int): ActorsList
+    suspend fun getActors(id: Int): ActorsList
 
-    fun checkNetwork(): Boolean
+    suspend fun deleteAll()
 }

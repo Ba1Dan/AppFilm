@@ -1,6 +1,5 @@
 package ru.baiganov.appfilm.detail.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +26,7 @@ class MoviesDetailsViewModel(
     private fun loadMovie() {
         viewModelScope.launch {
             _movie.value = movie
-            val actorsList = repository.getActorsFromDatabase(movie.id)
+            val actorsList = repository.getActors(movie.id)
             _actors.postValue(actorsList.actors)
         }
     }

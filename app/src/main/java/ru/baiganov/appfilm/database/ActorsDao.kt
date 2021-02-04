@@ -18,4 +18,7 @@ interface ActorsDao {
 
     @Query("SELECT * FROM actors_list WHERE id == :idMovie")
     suspend fun getActors(idMovie: Int): ActorsList
+
+    @Query("DELETE FROM actors_list")
+    suspend fun deleteAllActors()
 }

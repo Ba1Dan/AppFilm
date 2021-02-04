@@ -8,12 +8,12 @@ import ru.baiganov.appfilm.pojo.Genre
 class ConverterMovie {
 
     @TypeConverter
-    fun fromGenre(genres: List<Genre>): String {
+    fun fromMovie(genres: List<Genre>): String {
         return Gson().toJson(genres)
     }
 
     @TypeConverter
-    fun toGenreList(genresAsString: String): List<Genre> {
+    fun toMovieList(genresAsString: String): List<Genre> {
         val gson = Gson()
         val type = object : TypeToken<List<Genre>>() {}.type
         return gson.fromJson(genresAsString, type)
