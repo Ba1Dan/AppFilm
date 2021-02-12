@@ -45,9 +45,7 @@ class FragmentMoviesList : Fragment() {
         val application: Application = activity?.application!!
         viewModel = ViewModelProvider(this, MoviesListFactory(
                 moviesDao = database.moviesDao(),
-                actorsDao = database.actorsDao(),
                 apiService = ApiFactory.apiService,
-                application = application
         )).get(MoviesListViewModel::class.java)
 
         viewModel.isLoading.observe(viewLifecycleOwner) { loading ->

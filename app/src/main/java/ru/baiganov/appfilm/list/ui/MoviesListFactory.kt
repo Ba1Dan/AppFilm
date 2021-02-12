@@ -13,14 +13,12 @@ import ru.baiganov.appfilm.list.repositories.NetworkMovieRepo
 class MoviesListFactory(
     private val apiService: ApiService,
     private val moviesDao: MoviesDao,
-    private val actorsDao: ActorsDao,
-    private val application: Application
-) : ViewModelProvider.AndroidViewModelFactory(application) {
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
         MoviesListViewModel::class.java -> MoviesListViewModel(
-                moviesRepository  = MovieRepo(
+                repository  = MovieRepo(
                         networkRepo = NetworkMovieRepo(apiService),
                         databaseRepo = DatabaseMovieRepo(moviesDao)
                 ))
