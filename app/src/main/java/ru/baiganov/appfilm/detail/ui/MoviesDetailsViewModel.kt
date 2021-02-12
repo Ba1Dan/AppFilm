@@ -29,6 +29,7 @@ class MoviesDetailsViewModel(
             _movie.postValue(movie)
             val actorsList = repository.getActors(movie.id)
             _actors.postValue(actorsList.actors)
+            repository.insertActors(actorsList)
         }
     }
 }

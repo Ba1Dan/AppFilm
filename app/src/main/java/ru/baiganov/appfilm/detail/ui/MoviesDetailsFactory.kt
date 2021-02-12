@@ -1,6 +1,5 @@
 package ru.baiganov.appfilm.detail.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.baiganov.appfilm.api.ApiService
