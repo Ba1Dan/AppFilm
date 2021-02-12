@@ -1,13 +1,11 @@
 package ru.baiganov.appfilm.list.ui
 
-import android.app.Application
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,7 +40,6 @@ class FragmentMoviesList : Fragment() {
     @ExperimentalSerializationApi
     private fun setupViewModel() {
         val database: AppDatabase = AppDatabase.create(requireContext())
-        val application: Application = activity?.application!!
         viewModel = ViewModelProvider(this, MoviesListFactory(
                 moviesDao = database.moviesDao(),
                 apiService = ApiFactory.apiService,

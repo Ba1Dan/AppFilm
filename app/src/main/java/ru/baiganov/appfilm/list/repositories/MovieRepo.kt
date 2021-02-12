@@ -8,12 +8,18 @@ class MovieRepo(
         private val databaseRepo: DatabaseMovieRepo
 ) : MoviesRepository {
 
+    private var network: Boolean = true
     override suspend fun getMovies(): List<Movie> {
-        return try {
-            networkRepo.getMovies()
+        try {
+            return networkRepo.getMovies()
         } catch (e: Exception) {
-            databaseRepo.getMovies()
+            network = false
+            return databaseRepo.getMovies()
         }
+    }
+
+    suspend fun checkNetwork(): Boolean {
+        return network
     }
 
     override suspend fun getMovie(id: Int): Movie {

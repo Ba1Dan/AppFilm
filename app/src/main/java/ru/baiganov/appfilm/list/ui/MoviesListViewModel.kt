@@ -15,9 +15,11 @@ class MoviesListViewModel(
 
     private val _mutableMovies = MutableLiveData<List<Movie>>(emptyList())
     private val _isLoading = MutableLiveData(true)
+    private val _isNotifying = MutableLiveData(false)
 
     val movieList: LiveData<List<Movie>> = _mutableMovies
     val isLoading: LiveData<Boolean> = _isLoading
+    val isNotifying: LiveData<Boolean> = _isNotifying //
 
     init {
         loadMovieJson()
