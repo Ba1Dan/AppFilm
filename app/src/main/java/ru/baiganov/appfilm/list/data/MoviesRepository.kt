@@ -13,9 +13,9 @@ interface MoviesRepository {
 
     suspend fun insertMovies(moviesList: List<Movie>)
 
-    suspend fun insertActors(actorsList: ActorsList)
+    //suspend fun insertActors(actorsList: ActorsList)
 
-    suspend fun getActors(id: Int): ActorsList
+    //suspend fun getActors(id: Int): ActorsList
 
     suspend fun deleteAll()
 }

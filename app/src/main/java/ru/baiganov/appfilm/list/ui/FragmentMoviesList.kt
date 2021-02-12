@@ -36,21 +36,23 @@ class FragmentMoviesList : Fragment() {
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
+        setupViewModel()
+    }
+
+    @ExperimentalSerializationApi
+    private fun setupViewModel() {
         val database: AppDatabase = AppDatabase.create(requireContext())
         val application: Application = activity?.application!!
-
         viewModel = ViewModelProvider(this, MoviesListFactory(
                 moviesDao = database.moviesDao(),
                 actorsDao = database.actorsDao(),
                 apiService = ApiFactory.apiService,
                 application = application
-        )
-        ).get(MoviesListViewModel::class.java)
-        viewModel.isLoading.observe(this, {
-            if (it) {
-                Toast.makeText(requireContext(), "No Network", Toast.LENGTH_SHORT).show()
-            }
-        })
+        )).get(MoviesListViewModel::class.java)
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            binding.pbMovies.visibility = if (loading) View.VISIBLE else View.GONE
+        }
         viewModel.movieList.observe(this, {
             updateAdapter(it)
         })

@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import ru.baiganov.appfilm.api.ApiService
 import ru.baiganov.appfilm.database.ActorsDao
 import ru.baiganov.appfilm.database.MoviesDao
-import ru.baiganov.appfilm.list.data.NetworkMovieRepo
+import ru.baiganov.appfilm.detail.data.NetworkActorRepo
+import ru.baiganov.appfilm.list.repositories.DatabaseMovieRepo
+import ru.baiganov.appfilm.list.repositories.MovieRepo
+import ru.baiganov.appfilm.list.repositories.NetworkMovieRepo
 
 class MoviesListFactory(
     private val apiService: ApiService,
@@ -17,12 +20,15 @@ class MoviesListFactory(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
-        MoviesListViewModel::class.java -> MoviesListViewModel(repository = NetworkMovieRepo(
-                apiService = apiService,
-                moviesDao = moviesDao,
-                actorsDao = actorsDao
-        ),
-        application = application)
+        MoviesListViewModel::class.java -> MoviesListViewModel(
+                moviesRepository  = MovieRepo(
+                        networkRepo = NetworkMovieRepo(apiService),
+                        databaseRepo = DatabaseMovieRepo(moviesDao)
+                ),
+                actorsRepository = NetworkActorRepo(
+                        apiService = apiService,
+                        actorsDao = actorsDao
+                ))
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
 }

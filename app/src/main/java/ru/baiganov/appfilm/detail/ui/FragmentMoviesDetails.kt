@@ -10,8 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.serialization.ExperimentalSerializationApi
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.adapter.ActorsAdapter
+import ru.baiganov.appfilm.api.ApiFactory
+import ru.baiganov.appfilm.database.AppDatabase
 import ru.baiganov.appfilm.databinding.FragmentMoviesDetailsBinding
 import ru.baiganov.appfilm.pojo.Movie
 
@@ -27,24 +30,35 @@ class FragmentMoviesDetails : Fragment() {
         return inflater.inflate(R.layout.fragment_movies_details, container, false)
     }
 
+    @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMoviesDetailsBinding.bind(view)
+        setUpListeners()
         initRecycler()
+        setupViewModel()
+    }
 
+    private fun setUpListeners() {
         binding.tvBack.setOnClickListener {
             fragmentManager?.popBackStack()
         }
+    }
 
-        viewModelFactory = arguments?.getParcelable<Movie>("movie")?.let { movie ->  
+    @ExperimentalSerializationApi
+    private fun setupViewModel() {
+        val database = AppDatabase.create(requireContext())
+        viewModelFactory = arguments?.getParcelable<Movie>("movie")?.let { movie ->
             MoviesDetailsFactory(
-                    movie,
-                    requireContext(),
+                    movie = movie,
+                    apiService = ApiFactory.apiService,
+                    actorsDao = database.actorsDao()
             )
         }!!
 
         val viewModelMovie = ViewModelProvider(
-                this, viewModelFactory
+                this,
+                viewModelFactory
         ).get(MoviesDetailsViewModel::class.java)
 
         viewModelMovie.movies.observe(viewLifecycleOwner) {
@@ -79,9 +93,6 @@ class FragmentMoviesDetails : Fragment() {
             }
         }
         binding.tvTag.text = temp
-        /*if (movie.actors.isEmpty()) {
-            binding.tvCast.isVisible = false
-        }*/
         Glide.with(requireContext())
                 .load(movie.backdrop)
                 .into(binding.ivPoster)

@@ -1,20 +1,14 @@
-package ru.baiganov.appfilm.list.data
+package ru.baiganov.appfilm.list.repositories
 
 import ru.baiganov.appfilm.api.ApiService
-import ru.baiganov.appfilm.database.ActorsDao
-import ru.baiganov.appfilm.database.MoviesDao
-import ru.baiganov.appfilm.pojo.ActorsList
 import ru.baiganov.appfilm.pojo.Movie
 
 private const val ORIGINAL = "original"
 
-class NetworkMovieRepo(
-    private val apiService: ApiService,
-    private val moviesDao: MoviesDao,
-) : MoviesRepository {
+class NetworkMovieRepo(private val apiService: ApiService) : MoviesRepository {
 
-    override suspend fun deleteAll() {
-        moviesDao.deleteAllMovies()
+    override suspend fun insertMovies(moviesList: List<Movie>) {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getMovies(): List<Movie> {
@@ -35,11 +29,7 @@ class NetworkMovieRepo(
         return movie
     }
 
-    override suspend fun getMoviesFromDatabase(): List<Movie>  {
-        return moviesDao.getMovies()
-    }
-
-    override suspend fun insertMovies(moviesList: List<Movie>) {
-        moviesDao.insertMovies(moviesList = moviesList)
+    override suspend fun deleteAll() {
+        TODO("Not yet implemented")
     }
 }

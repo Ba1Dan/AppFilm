@@ -1,23 +1,31 @@
 package ru.baiganov.appfilm.detail.data
 
-import android.content.Context
-import ru.baiganov.appfilm.database.AppDatabase
-import ru.baiganov.appfilm.pojo.Actor
+import ru.baiganov.appfilm.api.ApiService
+import ru.baiganov.appfilm.database.ActorsDao
 import ru.baiganov.appfilm.pojo.ActorsList
 
 private const val ORIGINAL = "original"
 
 class NetworkActorRepo(
-        applicationContext: Context
+        private val apiService: ApiService,
+        private val actorsDao: ActorsDao,
 ) : ActorsRepository {
 
-    private val database = AppDatabase.create(applicationContext)
+    /*override suspend fun getActors(idMovie: Int): ActorsList {
+        return actorsDao.getActors(idMovie)
+    }*/
 
-    override suspend fun insertActors(actorsList: List<Actor>, id: Int) {
-        database.actorsDao().insertActors(ActorsList(id, actorsList))
+    override suspend fun getActors(id: Int): ActorsList {
+        val actors = apiService.getActors(id).actors
+        val imageBaseUrl = apiService.getConfig().images.baseUrl + ORIGINAL
+        actors.map {
+            val fullUrl = imageBaseUrl + it.actorImageUrl
+            it.actorImageUrl = fullUrl
+        }
+        return ActorsList(id, actors)
     }
 
-    override suspend fun getActors(idMovie: Int): ActorsList {
-        return database.actorsDao().getActors(idMovie)
+    override suspend fun insertActors(actorsList: ActorsList) {
+        actorsDao.insertActors(actorsList = actorsList)
     }
 }

@@ -1,4 +1,4 @@
-package ru.baiganov.appfilm.utlils
+package ru.baiganov.appfilm.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

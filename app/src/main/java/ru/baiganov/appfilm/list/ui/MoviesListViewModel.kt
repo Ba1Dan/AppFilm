@@ -1,20 +1,20 @@
 package ru.baiganov.appfilm.list.ui
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.baiganov.appfilm.list.data.MoviesRepository
+import ru.baiganov.appfilm.detail.data.ActorsRepository
+import ru.baiganov.appfilm.list.repositories.MoviesRepository
 import ru.baiganov.appfilm.pojo.Movie
-import ru.baiganov.appfilm.utlils.checkNetwork
 
 class MoviesListViewModel(
-        private val repository: MoviesRepository,
-        application: Application
-        ) : AndroidViewModel(application) {
+        private val moviesRepository: MoviesRepository,
+        private val actorsRepository: ActorsRepository,
+        ) : ViewModel() {
 
     private val _mutableMovies = MutableLiveData<List<Movie>>(emptyList())
-    private val _isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData(true)
 
     val movieList: LiveData<List<Movie>> = _mutableMovies
     val isLoading: LiveData<Boolean> = _isLoading
@@ -24,27 +24,17 @@ class MoviesListViewModel(
     }
 
     private fun loadMovieJson() {
-        viewModelScope.launch {
-            //repository.deleteAll()
-            val temp = repository.getMoviesFromDatabase()
-            Log.i("INFO_MOVIES_DATABASE", temp.toString())
+        viewModelScope.launch(Dispatchers.IO) {
+            val temp = moviesRepository.getMovies()
+            _isLoading.postValue(false)
             _mutableMovies.postValue(temp)
-
-            if(checkNetwork(getApplication())) {
-                val movies = repository.getMovies()
-                Log.i("INFO_MOVIES_NETWORK", movies.toString())
-                insertActorsInDatabase(movies)
-                _mutableMovies.postValue(movies)
-                repository.insertMovies(movies)
-            } else {
-                _isLoading.postValue(true)
-            }
+            moviesRepository.insertMovies(temp)
         }
     }
 
     private suspend fun insertActorsInDatabase(movies: List<Movie>) {
         movies.forEach {
-            repository.insertActors(repository.getActors(it.id))
+            actorsRepository.insertActors(actorsRepository.getActors(it.id))
         }
     }
 }

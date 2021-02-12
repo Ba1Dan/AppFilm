@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.detail.data.ActorsRepository
 import ru.baiganov.appfilm.pojo.Actor
@@ -24,8 +25,8 @@ class MoviesDetailsViewModel(
     }
 
     private fun loadMovie() {
-        viewModelScope.launch {
-            _movie.value = movie
+        viewModelScope.launch(Dispatchers.IO) {
+            _movie.postValue(movie)
             val actorsList = repository.getActors(movie.id)
             _actors.postValue(actorsList.actors)
         }
