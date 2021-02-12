@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.baiganov.appfilm.detail.data.ActorsRepository
+import ru.baiganov.appfilm.detail.repositories.ActorsRepository
 import ru.baiganov.appfilm.list.repositories.MoviesRepository
 import ru.baiganov.appfilm.pojo.Movie
 

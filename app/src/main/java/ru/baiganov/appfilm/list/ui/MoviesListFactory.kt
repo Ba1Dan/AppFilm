@@ -7,6 +7,8 @@ import ru.baiganov.appfilm.api.ApiService
 import ru.baiganov.appfilm.database.ActorsDao
 import ru.baiganov.appfilm.database.MoviesDao
 import ru.baiganov.appfilm.detail.data.NetworkActorRepo
+import ru.baiganov.appfilm.detail.repositories.ActorRepo
+import ru.baiganov.appfilm.detail.repositories.DatabaseActorRepo
 import ru.baiganov.appfilm.list.repositories.DatabaseMovieRepo
 import ru.baiganov.appfilm.list.repositories.MovieRepo
 import ru.baiganov.appfilm.list.repositories.NetworkMovieRepo
@@ -25,9 +27,9 @@ class MoviesListFactory(
                         networkRepo = NetworkMovieRepo(apiService),
                         databaseRepo = DatabaseMovieRepo(moviesDao)
                 ),
-                actorsRepository = NetworkActorRepo(
-                        apiService = apiService,
-                        actorsDao = actorsDao
+                actorsRepository = ActorRepo(
+                        databaseActorRepo = DatabaseActorRepo(actorsDao),
+                        networkActorRepo = ru.baiganov.appfilm.detail.repositories.NetworkActorRepo(apiService)
                 ))
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T

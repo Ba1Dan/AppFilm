@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.baiganov.appfilm.detail.data.ActorsRepository
+import ru.baiganov.appfilm.detail.repositories.ActorsRepository
 import ru.baiganov.appfilm.pojo.Actor
 import ru.baiganov.appfilm.pojo.Movie
 
