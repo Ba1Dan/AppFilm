@@ -16,6 +16,14 @@ class MovieRepo(
         return database.getMovies()
     }
 
+    override suspend fun refreshMovies() {
+        val moviesJson = apiService.getPopularMovies().movies
+        val movies = moviesJson.map {
+            getMovie(it.id)
+        }
+        database.insertMovies(movies)
+    }
+
     private suspend fun updateData() {
         try {
             val moviesJson = apiService.getPopularMovies().movies
