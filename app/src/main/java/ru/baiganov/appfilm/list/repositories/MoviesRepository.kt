@@ -1,14 +1,13 @@
 package ru.baiganov.appfilm.list.repositories
 
+import androidx.lifecycle.LiveData
 import ru.baiganov.appfilm.pojo.Movie
 
 interface MoviesRepository {
 
-    suspend fun getMovies(): List<Movie>
+    suspend fun getMovies(): LiveData<List<Movie>>
 
     suspend fun getMovie(id: Int): Movie
 
-    suspend fun insertMovies(moviesList: List<Movie>)
-
-    suspend fun deleteAll()
+    suspend fun delete()
 }

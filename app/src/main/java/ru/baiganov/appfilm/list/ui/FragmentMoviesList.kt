@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -45,12 +46,13 @@ class FragmentMoviesList : Fragment() {
                 apiService = ApiFactory.apiService,
         )).get(MoviesListViewModel::class.java)
 
-        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
-            binding.pbMovies.visibility = if (loading) View.VISIBLE else View.GONE
-        }
         viewModel.movieList.observe(this, {
             updateAdapter(it)
         })
+
+        viewModel.isNotifying.observe(viewLifecycleOwner) { notifying ->
+            if (notifying) Toast.makeText(activity?.applicationContext, "No network", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initViews(view: View) {

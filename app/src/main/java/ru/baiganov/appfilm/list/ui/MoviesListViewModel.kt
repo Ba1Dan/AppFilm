@@ -1,25 +1,22 @@
 package ru.baiganov.appfilm.list.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.baiganov.appfilm.list.repositories.MoviesRepository
 import ru.baiganov.appfilm.pojo.Movie
+import kotlin.RuntimeException
 
 class MoviesListViewModel(
         private val repository: MoviesRepository
         ) : ViewModel() {
 
-    private val _mutableMovies = MutableLiveData<List<Movie>>(emptyList())
-    private val _isLoading = MutableLiveData(true)
+    private val _mutableMovies = MutableLiveData<List<Movie>>()
     private val _isNotifying = MutableLiveData(false)
 
     val movieList: LiveData<List<Movie>> = _mutableMovies
-    val isLoading: LiveData<Boolean> = _isLoading
-    val isNotifying: LiveData<Boolean> = _isNotifying //
+    val isNotifying: LiveData<Boolean> = _isNotifying
 
     init {
         loadMovieJson()
@@ -27,10 +24,17 @@ class MoviesListViewModel(
 
     private fun loadMovieJson() {
         viewModelScope.launch(Dispatchers.IO) {
-            val temp = repository.getMovies()
-            _isLoading.postValue(false)
-            _mutableMovies.postValue(temp)
-            repository.insertMovies(temp)
+            try {
+                val data = repository.getMovies()
+                withContext(Dispatchers.Main) {
+                    data.observeForever(Observer {
+                        _mutableMovies.postValue(it)
+                    })
+                }
+            } catch (e: RuntimeException) {
+                e.printStackTrace()
+                _isNotifying.postValue(true)
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package ru.baiganov.appfilm.pojo
 
+import androidx.lifecycle.LiveData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
