@@ -22,7 +22,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) : Corouti
         val repositoryActor: ActorsRepository = ActorRepo(NetworkActorRepo(api), DatabaseActorRepo(database.actorsDao()))
 
         try {
-            repositoryMovie.refreshMovies()
+            repositoryMovie.updateData()
         } catch (e: HttpException) {
             return Result.retry()
         }

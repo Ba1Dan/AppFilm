@@ -2,7 +2,9 @@ package ru.baiganov.appfilm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.work.WorkManager
 import ru.baiganov.appfilm.list.ui.FragmentMoviesList
+import ru.baiganov.appfilm.work.DataSchedule
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,5 +19,6 @@ class MainActivity : AppCompatActivity() {
                 commit()
             }
         }
+        DataSchedule(WorkManager.getInstance()).schedule()
     }
 }
