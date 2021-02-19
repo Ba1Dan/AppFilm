@@ -1,6 +1,7 @@
 package ru.baiganov.appfilm.list.ui
 
 import android.content.res.Resources
+import java.util.concurrent.TimeUnit
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.api.ApiFactory
@@ -18,6 +20,7 @@ import ru.baiganov.appfilm.database.AppDatabase
 import ru.baiganov.appfilm.databinding.FragmentMoviesListBinding
 import ru.baiganov.appfilm.detail.ui.FragmentMoviesDetails
 import ru.baiganov.appfilm.pojo.Movie
+import ru.baiganov.appfilm.work.RefreshDataWorker
 
 
 class FragmentMoviesList : Fragment() {
@@ -80,5 +83,11 @@ class FragmentMoviesList : Fragment() {
             addToBackStack(null)
             commit()
         }
+    }
+
+    private fun setupWork() {
+
+
+
     }
 }
