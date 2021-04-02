@@ -8,3 +8,5 @@ You can watch popular films, read information about them, watch actors.
 <img src="https://user-images.githubusercontent.com/53014698/113436123-cb75ec00-93ec-11eb-9908-c540a408a7f4.jpg" height="585" width="270" />
 <img src="https://user-images.githubusercontent.com/53014698/113436111-c6b13800-93ec-11eb-9fcd-c14392424b39.jpg" height="585" width="270" />
 
+# Technologies
+[GitHub](http://github.com)
