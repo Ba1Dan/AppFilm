@@ -4,6 +4,7 @@ import android.content.res.Resources
 import java.util.concurrent.TimeUnit
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class FragmentMoviesList : Fragment() {
 
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("TESTTT", "onViewCreated")
         initViews(view)
         setupViewModel()
     }
@@ -86,8 +88,6 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun setupWork() {
-
-
 
     }
 }

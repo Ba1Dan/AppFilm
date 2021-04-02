@@ -6,10 +6,6 @@ import androidx.work.WorkerParameters
 import com.bumptech.glide.load.HttpException
 import ru.baiganov.appfilm.api.ApiFactory
 import ru.baiganov.appfilm.database.AppDatabase
-import ru.baiganov.appfilm.detail.repositories.ActorRepo
-import ru.baiganov.appfilm.detail.repositories.ActorsRepository
-import ru.baiganov.appfilm.detail.repositories.DatabaseActorRepo
-import ru.baiganov.appfilm.detail.repositories.NetworkActorRepo
 import ru.baiganov.appfilm.list.repositories.MovieRepo
 import ru.baiganov.appfilm.list.repositories.MoviesRepository
 
@@ -19,7 +15,6 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) : Corouti
         val database: AppDatabase = AppDatabase.create(applicationContext)
         val api = ApiFactory.apiService
         val repositoryMovie: MoviesRepository = MovieRepo(apiService = api, database = database.moviesDao())
-        val repositoryActor: ActorsRepository = ActorRepo(NetworkActorRepo(api), DatabaseActorRepo(database.actorsDao()))
 
         try {
             repositoryMovie.updateData()

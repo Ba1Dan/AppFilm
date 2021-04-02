@@ -62,15 +62,6 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/tv_pg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pg_13"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_pg_13"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

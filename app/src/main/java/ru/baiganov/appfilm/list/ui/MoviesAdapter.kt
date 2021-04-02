@@ -50,7 +50,6 @@ class MoviesViewHolder(private val binding: ViewHolderMovieBinding) :
         binding.tvNameItem.text = movie.title
         binding.tvTime.text = movie.runtime.toString() + " " + context.getString(R.string.min)
         binding.tvReviewsItem.text = movie.voteCount.toString() + " " + context.getString(R.string.reviews)
-        binding.tvPgItem.text = /*movie.minimumAge.toString() +*/ context.getString(R.string.plus)
         var temp:String = ""
         movie.genres.forEach {
             temp = if (temp == "") {

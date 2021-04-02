@@ -80,7 +80,6 @@ class FragmentMoviesDetails : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun bindMovie(movie: Movie) {
         binding.tvName.text = movie.title
-        binding.tvPg.text = /*movie.minimumAge.toString()+ */ requireContext().getString(R.string.plus)
         binding.tvReviews.text = movie.voteCount.toString() + " " + requireContext().getString(R.string.reviews)
         binding.tvStoryline.text = movie.overview
         binding.rbStars.rating = movie.ratings / 2
