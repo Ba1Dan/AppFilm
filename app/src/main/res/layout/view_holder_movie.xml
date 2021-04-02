@@ -29,7 +29,6 @@
                 android:id="@+id/iv_poster_item"
                 android:layout_width="match_parent"
                 android:layout_height="248dp"
-                android:src="@drawable/bg_list"
                 app:layout_constraintEnd_toEndOf="@id/fl_movie"
                 app:layout_constraintStart_toStartOf="@id/fl_movie"
                 app:layout_constraintTop_toTopOf="@id/fl_movie"
@@ -44,23 +43,6 @@
                 app:layout_constraintTop_toTopOf="@id/fl_movie" />
 
         </FrameLayout>
-
-
-        <TextView
-            android:id="@+id/tv_pg_item"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:alpha="0.9"
-            android:background="@drawable/rounded_pg"
-            android:gravity="center_vertical|center_horizontal"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <RatingBar
             android:id="@+id/ratingBar"

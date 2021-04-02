@@ -1,7 +1,9 @@
 package ru.baiganov.appfilm.list.repositories
 
 import androidx.lifecycle.LiveData
-import retrofit2.HttpException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.baiganov.appfilm.api.ApiService
 import ru.baiganov.appfilm.database.MoviesDao
 import ru.baiganov.appfilm.pojo.Movie
@@ -12,20 +14,15 @@ class MovieRepo(
 ) : MoviesRepository {
 
     override suspend fun getMovies(): LiveData<List<Movie>> {
-        updateData()
         return database.getMovies()
     }
 
-    private suspend fun updateData() {
-        try {
-            val moviesJson = apiService.getPopularMovies().movies
-            val movies = moviesJson.map {
-                getMovie(it.id)
-            }
-            database.insertMovies(movies)
-        } catch (e: Exception) {
-            throw RuntimeException()
+    override suspend fun updateData() {
+        val moviesJson = apiService.getPopularMovies().movies
+        val movies = moviesJson.map {
+            getMovie(it.id)
         }
+        database.insertMovies(movies)
     }
 
     override suspend fun getMovie(id: Int): Movie {

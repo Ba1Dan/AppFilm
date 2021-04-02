@@ -19,19 +19,20 @@ class MoviesListViewModel(
     val isNotifying: LiveData<Boolean> = _isNotifying
 
     init {
-        loadMovieJson()
+        loadMovies()
     }
 
-    private fun loadMovieJson() {
+    private fun loadMovies() {
         viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getMovies()
+            withContext(Dispatchers.Main) {
+                data.observeForever(Observer {
+                    _mutableMovies.postValue(it)
+                })
+            }
             try {
-                val data = repository.getMovies()
-                withContext(Dispatchers.Main) {
-                    data.observeForever(Observer {
-                        _mutableMovies.postValue(it)
-                    })
-                }
-            } catch (e: RuntimeException) {
+                repository.updateData()
+            } catch (e: Exception) {
                 e.printStackTrace()
                 _isNotifying.postValue(true)
             }
