@@ -1,7 +1,7 @@
 
 # General info
 The application was made as part of training at Android Academy Fundamentals. 
-You can watch popular films, read information about them, watch actors. 
+You can watch popular films, read information about them, watch actors. In this project I am using architecture MVVM
 
 # Screenshots
 <img src="https://user-images.githubusercontent.com/53014698/113436103-c153ed80-93ec-11eb-8d40-db2e0fbc8482.jpg" height="585" width="270" />
