@@ -5,18 +5,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import ru.baiganov.appfilm.R
 import ru.baiganov.appfilm.databinding.ViewHolderMovieBinding
 import ru.baiganov.appfilm.pojo.Movie
 
-class MoviesAdapter (
+class MoviesAdapter(
     private val listener: ItemClickListener
-        ) : RecyclerView.Adapter<MoviesViewHolder>() {
+) : RecyclerView.Adapter<MoviesViewHolder>() {
 
     private var movies = listOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding = ViewHolderMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ViewHolderMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviesViewHolder(binding)
     }
 
@@ -45,12 +48,20 @@ class MoviesViewHolder(private val binding: ViewHolderMovieBinding) :
     fun onBind(movie: Movie) {
         Glide.with(context)
             .load(movie.poster)
+            .transform(
+                CenterCrop(), RoundedCorners(
+                    itemView.context.resources.getDimension(
+                        R.dimen.small
+                    ).toInt()
+                )
+            )
             .into(binding.ivPosterItem)
 
         binding.tvNameItem.text = movie.title
         binding.tvTime.text = movie.runtime.toString() + " " + context.getString(R.string.min)
-        binding.tvReviewsItem.text = movie.voteCount.toString() + " " + context.getString(R.string.reviews)
-        var temp:String = ""
+        binding.tvReviewsItem.text =
+            movie.voteCount.toString() + " " + context.getString(R.string.reviews)
+        var temp: String = ""
         movie.genres.forEach {
             temp = if (temp == "") {
                 it.name

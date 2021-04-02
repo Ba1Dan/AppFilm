@@ -13,4 +13,5 @@
     <dimen name="rating_height">20dp</dimen>
     <dimen name="desc_height">124dp</dimen>
     <dimen name="text_size_tag">8sp</dimen>
+    <dimen name="small">8dp</dimen>
 </resources>
